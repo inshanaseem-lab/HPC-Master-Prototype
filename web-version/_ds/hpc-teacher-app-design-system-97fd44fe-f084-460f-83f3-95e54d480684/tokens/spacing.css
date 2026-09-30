@@ -1,0 +1,7 @@
+/* Spacing, radii, sizes — exact values from the screens. */
+:root{
+--space-2:2px;--space-4:4px;--space-8:8px;--space-12:12px;--space-14:14px;--space-16:16px;--space-20:20px;--space-24:24px;
+--screen-pad:16px;--screen-pad-bottom:96px;--section-gap:20px;
+--radius-sm:8px;--radius-btn-icon:10px;--radius-chip:12px;--radius-card:16px;--radius-card-lg:18px;--radius-pill:999px;--radius-round:9999px;
+--screen-width:412px;--status-bar-h:36px;--header-h:96px;--app-bar-h:68px;--button-h:48px;--input-h:50px;--icon-btn:40px;
+}

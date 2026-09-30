@@ -1,0 +1,22 @@
+/* Retint: the raw Figma export's default action/primary tokens map to a blue scale
+   (--color-blue-*). This project's brand is saffron/orange (see tokens/colors.css) —
+   override the semantic tokens so every component that reads --color-primary-*,
+   --surface-action*, --text-action*, --border-focus*, --icon-action* renders orange,
+   never blue. Raw --color-blue-* values are left in place (unused once repointed) so
+   Figma parity is still inspectable, but nothing in the UI reads them anymore.
+
+   WCAG: --color-primary-default is used BOTH as button fill (needs white text at
+   4.5:1) AND as text/icon color on white (needs 4.5:1 the other way). Saffron-600
+   only measures ~3.15:1 either direction — fails AA for normal-size text. Saffron-700
+   clears 4.5:1 both ways (≈4.9:1); hover/pressed steps to saffron-800 (≈6.2:1). */
+:root{
+--color-primary-50:var(--saffron-50);--color-primary-50-2:var(--saffron-50);
+--color-primary-100:var(--saffron-100);--color-primary-100-2:var(--saffron-100);
+--color-primary-300:var(--saffron-300);--color-primary-300-2:var(--saffron-300);--color-primary-300-3:var(--saffron-300);
+--color-primary-700:var(--saffron-800);--color-primary-700-2:var(--saffron-800);
+--color-primary-900:var(--saffron-800);--color-primary-900-2:var(--saffron-800);
+--color-primary-default:var(--saffron-700);--color-primary-default-2:var(--saffron-700);--color-primary-default-3:var(--saffron-700);
+--color-information-default:var(--saffron-700);
+--text-accent-blue:var(--saffron-700);
+--colors-blue:var(--saffron-700);
+}

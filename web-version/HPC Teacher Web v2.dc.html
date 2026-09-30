@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/components/figma/fig-tokens.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/components/figma/fig-typography.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/components/figma/fig-assets.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/tokens/orange-overrides.css">
+<link rel="stylesheet" href="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/styles.css">
+<script src="_ds/hpc-teacher-app-design-system-97fd44fe-f084-460f-83f3-95e54d480684/_ds_bundle.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F4F2EF;font-family:Poppins,sans-serif;color:#221F26;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#B55600;text-decoration:none}a:hover{color:#E86E00;text-decoration:underline}
+button,input,textarea{font-family:inherit}
+</style>
+</helmet>
+
+<div data-screen-label="Prototype switcher" style="position:sticky;top:0;z-index:30;height:40px;display:flex;align-items:center;gap:2px;padding:0 12px;overflow-x:auto;white-space:nowrap;background:#221F26">
+  <span style="flex:none;font-size:10px;font-weight:600;letter-spacing:.8px;color:#A7A4AC;margin:0 10px 0 auto">TEACHER PROTOTYPE</span>
+  <sc-for list="{{ switcher }}" as="s" hint-placeholder-count="8">
+    <button onClick="{{ s.go }}" style="flex:none;border:0;cursor:pointer;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:500;background:{{ s.bg }};color:{{ s.fg }}">{{ s.label }}</button>
+  </sc-for>
+  <span style="flex:none;margin-right:auto"></span>
+</div>
+
+<div style="display:flex;min-height:calc(100vh - 40px)">
+  <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+  <aside style="width:244px;flex:none;position:sticky;top:40px;height:calc(100vh - 40px);align-self:flex-start;background:#FFFBF9;border-right:1px solid #E4E1DD;display:flex;flex-direction:column;padding:20px 12px 16px">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 10px 20px">
+      <img src="assets/parakh.png" alt="PARAKH" style="height:36px;width:auto">
+      <div style="display:flex;flex-direction:column;line-height:1.25">
+        <span style="font-size:13px;font-weight:600">Holistic Progress Card</span>
+        <span style="font-size:11px;color:#6B6873">Teacher</span>
+      </div>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" style="display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border:0;border-radius:10px;cursor:pointer;text-align:left;font-size:14px;font-weight:{{ n.weight }};background:{{ n.bg }};color:{{ n.fg }}" style-hover="background:#FFF2E6">
+          {{ n.iconEl }}
+          <span style="flex:1">{{ n.label }}</span>
+          <span style="font-size:11px;font-weight:600;color:#fff;background:#FF7900;border-radius:999px;min-width:20px;height:20px;padding:0 6px;align-items:center;justify-content:center;display:{{ n.badgeDisplay }}">{{ n.badge }}</span>
+        </button>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:6px;align-items:center;padding:0 10px">
+        <img src="assets/govt-hp.png" alt="Government of Himachal Pradesh" style="height:28px;width:auto">
+        <img src="assets/hpbose.png" alt="HPBOSE" style="height:28px;width:auto">
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid #E4E1DD">
+        <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px">AS</span>
+        <span style="display:flex;flex-direction:column;min-width:0;flex:1">
+          <span style="font-size:13px;font-weight:600">Anjali Sharma</span>
+          <span style="font-size:11px;color:#6B6873;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Varana Primary School</span>
+        </span>
+      </div>
+    </div>
+  </aside>
+  </sc-if>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;padding-bottom:{{ bottomPad }}">
+    <header style="position:sticky;top:40px;z-index:10;height:64px;display:flex;align-items:center;gap:16px;padding:0 clamp(16px,3vw,32px);background:rgba(244,242,239,.94);border-bottom:1px solid #E4E1DD">
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <img src="assets/parakh.png" alt="PARAKH" style="height:32px;width:auto">
+      </sc-if>
+      <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:8px;font-size:13px;min-width:0;flex:1;overflow:hidden">
+        <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="2">
+          <span style="display:flex;align-items:center;gap:8px;white-space:nowrap">
+            <span style="color:#A7A4AC;display:{{ c.sepDisplay }}">/</span>
+            <button onClick="{{ c.go }}" style="border:0;background:none;padding:0;cursor:pointer;font-size:13px;font-weight:{{ c.weight }};color:{{ c.fg }}">{{ c.label }}</button>
+          </span>
+        </sc-for>
+      </nav>
+      <label style="display:{{ searchDisplay }};align-items:center;gap:8px;height:40px;width:min(320px,34vw);padding:0 12px;border:1px solid #E4E1DD;border-radius:10px;background:#fff;color:#6B6873">
+        <span style="font-size:15px">⌕</span>
+        <input placeholder="Search a student by name or ID" style="flex:1;min-width:0;border:0;outline:none;font-size:13px;color:#221F26;background:transparent">
+      </label>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px">AS</span>
+      </sc-if>
+    </header>
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <main data-screen-label="T01 Home" style="width:100%;max-width:1280px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:13px;color:#6B6873">Thursday, 10 September</span>
+          <h1 style="margin:0;font-size:clamp(24px,2.4vw,30px);line-height:1.2;font-weight:600">Good morning, Anjali</h1>
+        </div>
+        <button onClick="{{ goNew }}" style="flex:none;white-space:nowrap;height:44px;padding:0 22px;border:0;border-radius:999px;background:#FF7900;color:#fff;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#E86E00"><span style="font-size:18px;line-height:1">+</span> New activity</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:start">
+        <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">Needs your attention</h2>
+              <span style="font-size:12px;font-weight:600;color:#B55600;background:#FFF2E6;border-radius:999px;padding:2px 8px">{{ attentionCount }}</span>
+            </div>
+            <button style="border:0;background:none;cursor:pointer;font-size:13px;font-weight:500;color:#B55600;white-space:nowrap">View all</button>
+          </div>
+          <sc-for list="{{ attention }}" as="a" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-top:1px solid #F1EFEC">
+              <span style="width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:{{ a.chipBg }};color:{{ a.chipFg }}">{{ a.section }}</span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:600;line-height:20px">{{ a.title }}</span>
+                <span style="font-size:12px;color:#6B6873">{{ a.meta }}</span>
+              </span>
+              <span style="font-size:12px;font-weight:600;white-space:nowrap;color:{{ a.dueFg }}">{{ a.due }}</span>
+              <button onClick="{{ a.go }}" style="flex:none;height:34px;padding:0 14px;border-radius:999px;border:1px solid #B55600;background:#FFF2E6;color:#B55600;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap" style-hover="background:#FFE6CF">{{ a.cta }}</button>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px">
+            <h2 style="margin:0;font-size:16px;font-weight:600">Live activities</h2>
+            <span style="font-size:12px;color:#6B6873">Progress so far</span>
+          </div>
+          <sc-for list="{{ live }}" as="l" hint-placeholder-count="3">
+            <button onClick="{{ l.go }}" style="width:100%;text-align:left;border:0;border-top:1px solid #F1EFEC;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:14px 20px;background:{{ l.rowBg }};color:#221F26" style-hover="background:#FAF8F6">
+              <span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                <span style="font-size:14px;font-weight:600;line-height:20px">{{ l.title }}</span>
+                <span style="font-size:13px;font-weight:600;white-space:nowrap">{{ l.count }}</span>
+              </span>
+              <span style="display:block;height:6px;border-radius:999px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:6px;border-radius:999px;background:#FF7900;width:{{ l.pct }}"></span></span>
+              <span style="font-size:12px;color:#6B6873">{{ l.meta }}</span>
+            </button>
+          </sc-for>
+        </section>
+      </div>
+
+      <section style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:18px;font-weight:600">Your classes</h2>
+          <button style="flex:none;height:36px;padding:0 14px;cursor:pointer;border-radius:999px;border:1px solid #E4E1DD;background:#fff;color:#221F26;font-size:13px;font-weight:500" style-hover="border-color:#B55600" onClick="{{ goProfile }}">Add/Remove Classes</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px">
+          <sc-for list="{{ classes }}" as="c" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+              <div style="padding:16px;display:flex;align-items:center;justify-content:space-between;background:{{ c.bg }}">
+                <span style="font-size:22px;font-weight:700;color:#221F26">{{ c.short }}</span>
+                <span style="font-size:12px;font-weight:500;color:#3F3D45">{{ c.stream }}</span>
+              </div>
+              <div style="padding:14px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-bottom:1px solid #F1EFEC">
+                <sc-for list="{{ c.stats }}" as="st" hint-placeholder-count="3">
+                  <span style="display:flex;flex-direction:column">
+                    <span style="font-size:16px;font-weight:600">{{ st.v }}</span>
+                    <span style="font-size:11px;color:#6B6873">{{ st.k }}</span>
+                  </span>
+                </sc-for>
+              </div>
+              <div style="display:flex">
+                <button style="flex:1;height:44px;border:0;background:#fff;cursor:pointer;font-size:13px;font-weight:500;color:#3F3D45;border-right:1px solid #F1EFEC" style-hover="background:#FAF8F6">View class</button>
+                <button onClick="{{ c.start }}" style="flex:1;height:44px;border:0;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#B55600" style-hover="background:#FFFAF5">+ Activity</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isWizard }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="{{ wizardLabel }}" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px) clamp(0px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:0 clamp(16px,2vw,0px)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <h1 style="margin:0;font-size:clamp(22px,2.2vw,28px);line-height:1.2;font-weight:600">New activity</h1>
+          <span style="font-size:13px;color:#6B6873">{{ wizardSub }}</span>
+        </div>
+        <ol aria-label="Progress" style="margin:0;padding:0;list-style:none;display:flex;align-items:center;gap:8px">
+          <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+            <li style="display:flex;align-items:center;gap:8px">
+              <span style="width:20px;height:1px;background:#D9D6D1;display:{{ st.lineDisplay }}"></span>
+              <span style="width:24px;height:24px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:{{ st.dotBg }};color:{{ st.dotFg }};border:1px solid {{ st.dotBorder }}">{{ st.mark }}</span>
+              <span style="font-size:13px;white-space:nowrap;font-weight:{{ st.weight }};color:{{ st.fg }};display:{{ st.labelDisplay }}">{{ st.label }}</span>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+
+      <div style="background:#fff;border:1px solid #E4E1DD;border-radius:{{ cardRadius }};overflow:hidden;display:flex;flex-direction:column">
+
+        <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:28px">
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">Which class is this for?</h2>
+              <span style="font-size:13px;color:#6B6873">Only classes you’ve added for HPC appear here.</span>
+            </div>
+            <div style="position:relative;width:100%;max-width:440px">
+              <button aria-haspopup="listbox" aria-expanded="{{ classOpen }}" onClick="{{ toggleClassOpen }}" style="width:100%;text-align:left;cursor:pointer;padding:10px 14px;border-radius:12px;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid {{ classTrigBorder }}" style-hover="border-color:#E86E00">
+                <span style="width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#221F26;background:{{ selClass.bg }}">{{ selClass.short }}</span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                  <span style="font-size:14px;font-weight:600">{{ selClass.name }}</span>
+                  <span style="font-size:12px;color:#6B6873">{{ selClass.meta }}</span>
+                </span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6873" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;transform:{{ classChevron }}"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ classOpen }}" hint-placeholder-val="{{ false }}">
+                <button aria-label="Close class list" onClick="{{ closeClassOpen }}" style="position:fixed;inset:0;z-index:25;border:0;background:transparent;cursor:default"></button>
+                <div style="position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:26;background:#fff;border:1px solid #E4E1DD;border-radius:12px;box-shadow:0 8px 24px rgba(34,31,38,.12);overflow:hidden;display:flex;flex-direction:column">
+                  <label style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-bottom:1px solid #F1EFEC;color:#6B6873">
+                    <span style="font-size:15px">⌕</span>
+                    <input value="{{ classQuery }}" onChange="{{ setClassQuery }}" placeholder="Search classes" style="flex:1;min-width:0;border:0;outline:none;font-size:14px;color:#221F26;background:transparent">
+                  </label>
+                  <div role="listbox" style="max-height:288px;overflow-y:auto;display:flex;flex-direction:column;padding:6px">
+                    <sc-for list="{{ classOpts }}" as="c" hint-placeholder-count="4">
+                      <button role="option" aria-selected="{{ c.on }}" onClick="{{ c.pick }}" style="text-align:left;cursor:pointer;padding:8px 10px;border:0;border-radius:8px;display:flex;align-items:center;gap:12px;background:{{ c.bg }}" style-hover="background:#FFF2E6">
+                        <span style="width:32px;height:32px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#221F26;background:{{ c.swatch }}">{{ c.short }}</span>
+                        <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                          <span style="font-size:14px;font-weight:600;color:{{ c.fg }}">{{ c.name }}</span>
+                          <span style="font-size:12px;color:#6B6873">{{ c.meta }}</span>
+                        </span>
+                        <span style="flex:none;font-size:14px;font-weight:700;color:#E86E00">{{ c.mark }}</span>
+                      </button>
+                    </sc-for>
+                    <sc-if value="{{ classNoMatch }}" hint-placeholder-val="{{ false }}">
+                      <div style="padding:16px 10px;font-size:13px;color:#6B6873;text-align:center">No classes match your search.</div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </section>
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">What kind of activity?</h2>
+              <span style="font-size:13px;color:#6B6873">Each type maps to one section of the Holistic Progress Card.</span>
+            </div>
+            <div role="radiogroup" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(320px,calc(50% - 6px))),1fr));gap:12px">
+              <sc-for list="{{ types }}" as="t" hint-placeholder-count="4">
+                <button role="radio" onClick="{{ t.pick }}" style="text-align:left;cursor:pointer;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:flex-start;height:100%;color:#221F26;border:1px solid {{ t.border }};background:{{ t.bg }}" style-hover="border-color:#E86E00">
+                  <span style="width:40px;height:40px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:{{ t.chipBg }};color:{{ t.chipFg }}">{{ t.s }}</span>
+                  <span style="flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;gap:4px">
+                    <span style="font-size:15px;line-height:22px;font-weight:600;min-height:40px;display:flex;align-items:center;color:{{ t.titleFg }}">{{ t.title }}</span>
+                    <span style="font-size:13px;line-height:19px;color:#6B6873;text-wrap:pretty">{{ t.body }}</span>
+                    <span style="font-size:12px;color:#6B6873;margin-top:auto;padding-top:8px">{{ t.meta }}</span>
+                  </span>
+                  <span style="width:18px;height:18px;flex:none;border-radius:50%;background:#fff;border:{{ t.radio }}"></span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isA2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:{{ splitCols }};min-height:520px">
+          <div style="padding:20px;border-right:1px solid {{ splitBorder }};border-bottom:1px solid {{ splitBorderB }};display:flex;flex-direction:column;gap:12px;background:#FFFBF9">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:15px;font-weight:600">Know Myself surveys</h2>
+              <span style="font-size:12px;line-height:17px;color:#6B6873">You guide each learner to fill these one by one.</span>
+            </div>
+            <div role="radiogroup" style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ surveys }}" as="s" hint-placeholder-count="5">
+                <button role="radio" onClick="{{ s.pick }}" style="text-align:left;cursor:{{ s.cursor }};padding:10px 12px;border-radius:10px;display:flex;align-items:center;gap:10px;border:1px solid {{ s.border }};background:{{ s.bg }}">
+                  <span style="font-size:12px;font-weight:700;width:26px;color:{{ s.codeFg }}">{{ s.code }}</span>
+                  <span style="flex:1;min-width:0;font-size:13px;font-weight:{{ s.weight }};color:{{ s.fg }}">{{ s.title }}</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;display:{{ s.tagDisplay }};background:{{ s.tagBg }};color:{{ s.tagFg }}">{{ s.tag }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:22px;min-width:0">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:12px;font-weight:600;color:#3653B8">Section A · Know Myself · {{ sv.code }}</span>
+              <h2 style="margin:0;font-size:22px;line-height:1.25;font-weight:600">{{ sv.title }}</h2>
+              <p style="margin:0;font-size:14px;line-height:21px;color:#3F3D45;max-width:62ch;text-wrap:pretty">{{ sv.why }}</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ svMeta }}" as="m" hint-placeholder-count="3">
+                <span style="font-size:12px;padding:5px 10px;border-radius:999px;background:#F1EFEC;color:#3F3D45"><span style="color:#6B6873">{{ m.k }}</span> <strong style="font-weight:600">{{ m.v }}</strong></span>
+              </sc-for>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px">
+              <section style="display:flex;flex-direction:column;gap:12px">
+                <h3 style="margin:0;font-size:14px;font-weight:600">Before you make it live · 15 min</h3>
+                <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ svSteps }}" as="p" hint-placeholder-count="3">
+                    <li style="display:flex;gap:10px;align-items:flex-start">
+                      <span style="flex:none;width:22px;height:22px;border-radius:50%;background:#FFF2E6;color:#B55600;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ p.n }}</span>
+                      <span style="font-size:13px;line-height:19px">{{ p.t }}</span>
+                    </li>
+                  </sc-for>
+                </ol>
+              </section>
+              <section style="display:flex;flex-direction:column;gap:10px">
+                <h3 style="margin:0;font-size:14px;font-weight:600">What learners will answer</h3>
+                <sc-for list="{{ svQuestions }}" as="qq" hint-placeholder-count="3">
+                  <div style="border:1px solid #E4E1DD;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+                    <span style="font-size:13px;font-weight:600;line-height:18px">{{ qq.n }}. {{ qq.q }}</span>
+                    <span style="font-size:12px;color:#6B6873;line-height:17px">{{ qq.opts }}</span>
+                  </div>
+                </sc-for>
+              </section>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isTopic }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:{{ splitCols }};min-height:520px">
+          <div style="padding:20px;border-right:1px solid {{ splitBorder }};border-bottom:1px solid {{ splitBorderB }};display:flex;flex-direction:column;gap:12px;background:#FFFBF9">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:15px;font-weight:600">{{ topicListTitle }}</h2>
+              <span style="font-size:12px;line-height:17px;color:#6B6873">Set by the state for {{ className }}.</span>
+            </div>
+            <div role="radiogroup" style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ topicOpts }}" as="t" hint-placeholder-count="3">
+                <button role="radio" onClick="{{ t.pick }}" style="text-align:left;cursor:pointer;padding:10px 12px;border-radius:10px;display:flex;flex-direction:column;gap:2px;border:1px solid {{ t.border }};background:{{ t.bg }}">
+                  <span style="font-size:13px;font-weight:{{ t.weight }};color:{{ t.fg }}">{{ t.title }}</span>
+                  <span style="font-size:12px;color:#6B6873">{{ t.subject }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:22px;min-width:0">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:12px;font-weight:600;color:{{ tpFg }}">{{ tpSection }} · {{ tp.subject }}</span>
+              <h2 style="margin:0;font-size:22px;line-height:1.25;font-weight:600">{{ tp.title }}</h2>
+              <p style="margin:0;font-size:14px;line-height:21px;color:#3F3D45;max-width:62ch;text-wrap:pretty">{{ tp.why }}</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;row-gap:8px">
+              <sc-for list="{{ stageStrip }}" as="st" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center">
+                  <span style="width:24px;height:1px;background:#D9D6D1;margin:0 8px;display:{{ st.lineDisplay }}"></span>
+                  <span style="display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:#FFF2E6">
+                    <span style="width:22px;height:22px;border-radius:50%;background:#FF7900;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ st.n }}</span>
+                    <span style="font-size:13px;font-weight:600;color:#B55600">{{ st.label }}</span>
+                  </span>
+                </span>
+              </sc-for>
+            </div>
+            <dl style="margin:0;display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:10px 24px;font-size:13px;padding:16px 0;border-top:1px solid #F1EFEC;border-bottom:1px solid #F1EFEC">
+              <sc-for list="{{ topicRows }}" as="r" hint-placeholder-count="4">
+                <dt style="color:#6B6873">{{ r.k }}</dt>
+                <dd style="margin:0;font-weight:500">{{ r.v }}</dd>
+              </sc-for>
+            </dl>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px">
+              <sc-for list="{{ materials }}" as="m" hint-placeholder-count="2">
+                <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #E4E1DD;border-radius:12px">
+                  <span style="width:36px;height:36px;flex:none;border-radius:8px;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">PDF</span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                    <span style="font-size:13px;font-weight:600">{{ m.title }}</span>
+                    <span style="font-size:11px;color:#6B6873">{{ m.meta }}</span>
+                  </span>
+                  <button onClick="{{ m.dl }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600">Download</button>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isB3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column">
+          <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+            <div role="tablist" style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:16px 16px 0;padding:4px;background:#F1EFEC;border-radius:999px">
+              <sc-for list="{{ gTabs }}" as="gt" hint-placeholder-count="2">
+                <button role="tab" onClick="{{ gt.go }}" style="border:0;cursor:pointer;height:40px;border-radius:999px;font-size:14px;font-weight:600;background:{{ gt.bg }};color:{{ gt.fg }}">{{ gt.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="display:grid;grid-template-columns:{{ gCols }};min-height:560px">
+            <sc-if value="{{ showCreatePane }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:clamp(16px,3vw,28px);display:flex;flex-direction:column;gap:16px;min-width:0;border-right:1px solid {{ splitBorder }}">
+              <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <h2 style="margin:0;font-size:20px;font-weight:600">{{ createTitle }}</h2>
+                  <span style="font-size:13px;color:#6B6873">{{ remainingText }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="flex:none;white-space:nowrap;font-size:13px;color:#6B6873">Students per group</span>
+                  <div style="display:flex;align-items:center;gap:4px;padding:3px;border:1px solid #E4E1DD;border-radius:999px;background:#fff">
+                    <button onClick="{{ sizeDown }}" aria-label="Fewer students per group" style="width:32px;height:32px;border:0;border-radius:50%;background:#FFF2E6;color:#E86E00;font-size:18px;cursor:pointer">−</button>
+                    <span style="min-width:28px;text-align:center;font-size:16px;font-weight:600">{{ size }}</span>
+                    <button onClick="{{ sizeUp }}" aria-label="More students per group" style="width:32px;height:32px;border:0;border-radius:50%;background:#FFF2E6;color:#E86E00;font-size:18px;cursor:pointer">+</button>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:1px solid #E4E1DD;border-radius:12px;background:#FFFBF9">
+                <div style="display:flex;justify-content:space-between;gap:12px">
+                  <span style="font-size:12px;font-weight:700;letter-spacing:.96px;color:#E86E00">SELECT {{ target }} STUDENTS</span>
+                  <span style="font-size:13px;color:#6B6873;white-space:nowrap">{{ pickCount }} / {{ target }} selected</span>
+                </div>
+                <span style="display:block;height:6px;border-radius:999px;background:#FFD9B5;overflow:hidden"><span style="display:block;height:6px;border-radius:999px;background:#FF7900;width:{{ pickPct }}"></span></span>
+              </div>
+              <label style="display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border:1px solid #E4E1DD;border-radius:999px;background:#fff;color:#6B6873">
+                <span style="font-size:16px">⌕</span>
+                <input value="{{ search }}" onChange="{{ setSearch }}" placeholder="Search students by name" style="flex:1;min-width:0;border:0;outline:none;font-size:14px;color:#221F26;background:transparent">
+              </label>
+              <div style="border:1px solid #E4E1DD;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))">
+                <sc-for list="{{ pool }}" as="p" hint-placeholder-count="6">
+                  <button role="checkbox" aria-checked="{{ p.on }}" onClick="{{ p.toggle }}" style="text-align:left;cursor:{{ p.cursor }};display:flex;align-items:center;gap:12px;padding:12px 16px;border:0;border-bottom:1px solid #F1EFEC;border-right:1px solid #F1EFEC;background:{{ p.bg }};opacity:{{ p.opacity }}" style-hover="background:#FFFAF5">
+                    <span style="width:40px;height:40px;flex:none;border-radius:50%;background:#F1EFEC;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;color:#3F3D45">{{ p.initials }}</span>
+                    <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                      <span style="font-size:14px;font-weight:600;color:#221F26">{{ p.name }}</span>
+                      <span style="font-size:12px;color:#6B6873">Student ID {{ p.sid }}</span>
+                    </span>
+                    <span style="width:20px;height:20px;flex:none;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:{{ p.checkBg }};border:1px solid {{ p.checkBorder }}">{{ p.mark }}</span>
+                  </button>
+                </sc-for>
+                <sc-if value="{{ poolEmpty }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:28px 16px;text-align:center;font-size:13px;color:#6B6873">{{ poolEmptyText }}</div>
+                </sc-if>
+              </div>
+              <button onClick="{{ createGroup }}" style="align-self:flex-start;flex:none;white-space:nowrap;height:46px;padding:0 28px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:{{ createCursor }};background:{{ createBg }};color:{{ createFg }};display:{{ createDisplay }}">{{ createTitle }}</button>
+            </div>
+            </sc-if>
+            <sc-if value="{{ showViewPane }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:clamp(16px,3vw,28px);background:#FFFBF9;display:flex;flex-direction:column;gap:12px;min-width:0">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                <h2 style="margin:0;font-size:15px;font-weight:600">Groups created</h2>
+                <span style="font-size:12px;color:#6B6873;white-space:nowrap">{{ assignedText }}</span>
+              </div>
+              <sc-for list="{{ createdGroups }}" as="cg" hint-placeholder-count="2">
+                <div style="background:#fff;border:1px solid #E4E1DD;border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start">
+                  <span style="width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#B54A45;background:{{ cg.color }}">{{ cg.code }}</span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:14px;font-weight:600">{{ cg.name }} · {{ cg.count }}</span>
+                    <span style="font-size:12px;line-height:17px;color:#6B6873">{{ cg.members }}</span>
+                  </span>
+                  <button onClick="{{ cg.remove }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:12px;font-weight:600;color:#B54A45;padding:4px 0">Remove</button>
+                </div>
+              </sc-for>
+              <sc-if value="{{ noGroups }}" hint-placeholder-val="{{ false }}">
+                <div style="flex:1;min-height:160px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;border:1px dashed #CDCACB;border-radius:12px;background:#F1EFEC;font-size:13px;line-height:19px;color:#6B6873">Groups you create will appear here.</div>
+              </sc-if>
+            </div>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isD2 }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:26px">
+          <section style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">What will the class do?</h2>
+              <span style="font-size:13px;color:#6B6873">Section D · Classroom Interaction. Pick a format.</span>
+            </div>
+            <div role="radiogroup" style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ dFormats }}" as="f" hint-placeholder-count="5">
+                <button role="radio" aria-checked="{{ f.on }}" onClick="{{ f.pick }}" style="cursor:pointer;white-space:nowrap;height:40px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:{{ f.weight }};border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</button>
+              </sc-for>
+            </div>
+          </section>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Topic or question
+            <input value="{{ dTopic }}" onInput="{{ setDTopic }}" placeholder="e.g. Should plastic be banned in our village?" style="height:48px;max-width:560px;border:1px solid #E4E1DD;border-radius:8px;padding:0 14px;font-size:14px;font-weight:500;color:#221F26;background:#fff;outline:none">
+            <span style="font-size:12px;font-weight:400;color:#6B6873">Students see this on their home screen.</span>
+          </label>
+          <section style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">What will you observe?</h2>
+              <span style="font-size:13px;color:#6B6873">Choose at least one. You’ll rate each student on these while the activity runs.</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px;max-width:760px">
+              <sc-for list="{{ dFocus }}" as="k" hint-placeholder-count="4">
+                <button role="checkbox" aria-checked="{{ k.on }}" onClick="{{ k.pick }}" style="text-align:left;cursor:pointer;display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;border:1px solid {{ k.border }};background:{{ k.bg }}">
+                  <span style="width:20px;height:20px;flex:none;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:{{ k.checkBg }};border:1px solid {{ k.border }}">{{ k.mark }}</span>
+                  <span style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:14px;font-weight:600">{{ k.label }}</span>
+                    <span style="font-size:12px;line-height:17px;color:#6B6873">{{ k.hint }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isLiveStep }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+          <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:22px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:16px;font-weight:600">Set it live</h2>
+              <span style="font-size:13px;color:#6B6873">Students see it on their home screen as soon as it’s live.</span>
+            </div>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">{{ deadlineLabel }}
+              <input type="date" value="{{ deadlineVal }}" min="2026-09-10" style="height:48px;max-width:260px;border:1px solid #E4E1DD;border-radius:8px;padding:0 14px;font-size:14px;font-weight:500;color:#221F26;background:#fff">
+              <span style="font-size:12px;font-weight:400;color:#6B6873">{{ deadlineHelp }}</span>
+            </label>
+            <button onClick="{{ toggleHeld }}" role="checkbox" aria-checked="{{ held }}" style="text-align:left;cursor:pointer;display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;border:1px solid {{ heldBorder }};background:{{ heldBg }}">
+              <span style="width:20px;height:20px;flex:none;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:{{ checkBg }};border:1px solid {{ checkBorder }}">{{ checkMark }}</span>
+              <span style="display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:600">I’ve held the discussion with {{ classShort }}</span>
+                <span style="font-size:12px;line-height:17px;color:#6B6873">{{ heldHelp }}</span>
+              </span>
+            </button>
+          </div>
+          <div style="padding:clamp(20px,3vw,32px);background:#FFFBF9;border-left:1px solid #F1EFEC;display:flex;flex-direction:column;gap:16px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">SUMMARY</h2>
+            <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:13px">
+              <sc-for list="{{ summary }}" as="r" hint-placeholder-count="4">
+                <dt style="color:#6B6873">{{ r.k }}</dt>
+                <dd style="margin:0;font-weight:600">{{ r.v }}</dd>
+              </sc-for>
+            </dl>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:clamp(32px,6vw,72px) clamp(20px,3vw,32px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px">
+          <span style="width:56px;height:56px;border-radius:50%;background:#E3F5E1;color:#1B6B34;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">✓</span>
+          <h2 style="margin:6px 0 0;font-size:22px;font-weight:600;text-wrap:pretty">{{ doneTitle }}</h2>
+          <p style="margin:0;font-size:14px;line-height:21px;color:#6B6873;max-width:460px;text-wrap:pretty">{{ doneBody }}</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+            <button onClick="{{ restart }}" style="height:44px;padding:0 20px;border-radius:999px;border:1px solid #B55600;background:#FFF2E6;color:#B55600;font-size:14px;font-weight:500;cursor:pointer">Create another</button>
+            <button onClick="{{ donePrimary }}" style="height:44px;padding:0 22px;border:0;border-radius:999px;background:#FF7900;color:#fff;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#E86E00">{{ donePrimaryLabel }}</button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ showFooter }}" hint-placeholder-val="{{ false }}">
+        <div style="position:sticky;bottom:{{ footerBottom }};display:flex;align-items:center;gap:12px;padding:14px clamp(16px,3vw,32px);border-top:1px solid #E4E1DD;background:#fff">
+          <button onClick="{{ goHome }}" style="border:0;background:none;cursor:pointer;font-size:14px;font-weight:500;color:#6B6873;padding:0" style-hover="color:#221F26">Cancel</button>
+          <span style="flex:1;min-width:0;font-size:12px;color:#6B6873;text-align:right">{{ footerHint }}</span>
+          <button onClick="{{ back }}" style="height:44px;padding:0 20px;border-radius:999px;border:1px solid #E4E1DD;background:#fff;color:#221F26;font-size:14px;font-weight:500;cursor:pointer;display:{{ backDisplay }}" style-hover="border-color:#B55600">Back</button>
+          <button onClick="{{ next }}" aria-disabled="{{ nextDisabled }}" style="flex:none;white-space:nowrap;height:44px;padding:0 24px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:{{ nextCursor }};background:{{ nextBg }};color:{{ nextFg }}">{{ nextLabel }}</button>
+        </div>
+        </sc-if>
+      </div>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isActivity }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T10 Group Project activity" style="width:100%;max-width:1280px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span style="white-space:nowrap;font-size:12px;font-weight:500;padding:3px 8px;border-radius:6px;background:#E8EEFF;color:#3653B8">Section B · Group Project</span>
+            <span style="white-space:nowrap;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px;background:#E3F5E1;color:#1B6B34">Live · due {{ act.deadline }}</span>
+          </div>
+          <h1 style="margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.2;font-weight:600">{{ act.title }}</h1>
+          <span style="font-size:13px;color:#6B6873">{{ actClassName }} · {{ actGroupCount }} groups · Plan → Observe → Final</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <sc-for list="{{ actStats }}" as="st" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:12px;color:#6B6873">{{ st.k }}</span>
+            <span style="font-size:22px;font-weight:600;line-height:1">{{ st.v }}<span style="font-size:13px;font-weight:500;color:#6B6873"> {{ st.of }}</span></span>
+            <span style="display:block;height:4px;border-radius:999px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:4px;background:{{ st.bar }};width:{{ st.pct }}"></span></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ actCols }};gap:20px;align-items:start">
+        <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;flex-wrap:wrap;border-bottom:1px solid #F1EFEC">
+            <h2 style="margin:0;font-size:16px;font-weight:600">Groups</h2>
+            <div role="tablist" style="display:flex;gap:4px;overflow-x:auto">
+              <sc-for list="{{ filters }}" as="fl" hint-placeholder-count="4">
+                <button role="tab" onClick="{{ fl.go }}" style="flex:none;white-space:nowrap;cursor:pointer;height:32px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid {{ fl.border }};background:{{ fl.bg }};color:{{ fl.fg }}">{{ fl.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <sc-for list="{{ groupRows }}" as="gr" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-top:1px solid #F1EFEC;flex-wrap:wrap">
+              <span style="width:40px;height:40px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#B54A45;background:{{ gr.color }}">{{ gr.code }}</span>
+              <span style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:600">{{ gr.name }}</span>
+                <span style="font-size:12px;line-height:17px;color:#6B6873">{{ gr.members }}</span>
+              </span>
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:110px">
+                <span style="font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;background:{{ gr.tagBg }};color:{{ gr.tagFg }}">{{ gr.tag }}</span>
+                <span style="font-size:11px;color:#6B6873;white-space:nowrap">{{ gr.when }}</span>
+              </span>
+              <button onClick="{{ gr.go }}" style="flex:none;white-space:nowrap;height:36px;min-width:96px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid {{ gr.ctaBorder }};background:{{ gr.ctaBg }};color:{{ gr.ctaFg }}">{{ gr.cta }}</button>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:40px 16px;text-align:center;font-size:13px;color:#6B6873;border-top:1px solid #F1EFEC">Nothing here right now.</div>
+          </sc-if>
+        </section>
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">ABOUT THIS PROJECT</h2>
+            <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13px">
+              <sc-for list="{{ actRows }}" as="r" hint-placeholder-count="4">
+                <dt style="color:#6B6873">{{ r.k }}</dt>
+                <dd style="margin:0;font-weight:500">{{ r.v }}</dd>
+              </sc-for>
+            </dl>
+          </div>
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">MATERIALS</h2>
+            <sc-for list="{{ materials }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                  <span style="font-size:13px;font-weight:600">{{ m.title }}</span>
+                  <span style="font-size:11px;color:#6B6873">{{ m.meta }}</span>
+                </span>
+                <button onClick="{{ m.dl }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600">Download</button>
+              </div>
+            </sc-for>
+          </div>
+        </aside>
+      </div>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isCAct }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T13 Problem Based Enquiry activity" style="width:100%;max-width:1280px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="white-space:nowrap;font-size:12px;font-weight:500;padding:3px 8px;border-radius:6px;background:#EFE8FF;color:#6A3FC4">Section C · Problem Based Enquiry</span>
+          <span style="white-space:nowrap;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px;background:#E3F5E1;color:#1B6B34">Live · due {{ cact.deadline }}</span>
+        </div>
+        <h1 style="margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.2;font-weight:600">{{ cact.title }}</h1>
+        <span style="font-size:13px;color:#6B6873">{{ cClassName }} · {{ cRosterCount }} students · Individual submission</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <sc-for list="{{ cStats }}" as="st" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:12px;color:#6B6873">{{ st.k }}</span>
+            <span style="font-size:22px;font-weight:600;line-height:1">{{ st.v }}<span style="font-size:13px;font-weight:500;color:#6B6873"> {{ st.of }}</span></span>
+            <span style="display:block;height:4px;border-radius:999px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:4px;background:{{ st.bar }};width:{{ st.pct }}"></span></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ actCols }};gap:20px;align-items:start">
+        <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;flex-wrap:wrap;border-bottom:1px solid #F1EFEC">
+            <h2 style="margin:0;font-size:16px;font-weight:600">Submissions</h2>
+            <div role="tablist" style="display:flex;gap:4px;overflow-x:auto">
+              <sc-for list="{{ cFilters }}" as="fl" hint-placeholder-count="3">
+                <button role="tab" onClick="{{ fl.go }}" style="flex:none;white-space:nowrap;cursor:pointer;height:32px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid {{ fl.border }};background:{{ fl.bg }};color:{{ fl.fg }}">{{ fl.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:{{ cNudgeBarDisplay }};align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;background:#FFFBF9;border-bottom:1px solid #F1EFEC">
+            <span style="font-size:13px;line-height:19px;color:#3F3D45;flex:1 1 240px">A reminder goes straight to the learner — nothing is marked or scored.</span>
+            <button onClick="{{ nudgeAll }}" style="flex:none;white-space:nowrap;height:36px;padding:0 16px;border-radius:999px;border:0;background:#FF7900;color:#fff;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:#E86E00">{{ nudgeAllLabel }}</button>
+          </div>
+          <sc-for list="{{ cRows }}" as="cr" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-top:1px solid #F1EFEC;flex-wrap:wrap">
+              <span style="width:40px;height:40px;flex:none;border-radius:50%;background:#FFF2E6;color:#B55600;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ cr.initials }}</span>
+              <span style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:600">{{ cr.name }}</span>
+                <span style="font-size:12px;line-height:17px;color:#6B6873">{{ cr.meta }}</span>
+              </span>
+              <span style="font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;background:{{ cr.tagBg }};color:{{ cr.tagFg }}">{{ cr.tag }}</span>
+              <span style="display:flex;gap:8px">
+                <button onClick="{{ cr.view }}" style="flex:none;white-space:nowrap;height:36px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid #E4E1DD;background:#fff;color:#221F26;display:{{ cr.viewDisplay }}" style-hover="border-color:#B55600">View</button>
+                <button onClick="{{ cr.go }}" style="flex:none;white-space:nowrap;height:36px;min-width:92px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;cursor:{{ cr.ctaCursor }};border:1px solid {{ cr.ctaBorder }};background:{{ cr.ctaBg }};color:{{ cr.ctaFg }}">{{ cr.cta }}</button>
+              </span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ cEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:40px 16px;text-align:center;font-size:13px;color:#6B6873;border-top:1px solid #F1EFEC">{{ cEmptyText }}</div>
+          </sc-if>
+        </section>
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">WHY THIS MATTERS</h2>
+            <p style="margin:0;font-size:14px;line-height:21px;text-wrap:pretty">{{ cWhy }}</p>
+          </div>
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">ABOUT THIS ENQUIRY</h2>
+            <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13px">
+              <sc-for list="{{ cAbout }}" as="r" hint-placeholder-count="4">
+                <dt style="color:#6B6873">{{ r.k }}</dt>
+                <dd style="margin:0;font-weight:500">{{ r.v }}</dd>
+              </sc-for>
+            </dl>
+          </div>
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px">
+            <h2 style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.96px;color:#E86E00">MATERIALS</h2>
+            <sc-for list="{{ materials }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+                  <span style="font-size:13px;font-weight:600">{{ m.title }}</span>
+                  <span style="font-size:11px;color:#6B6873">{{ m.meta }}</span>
+                </span>
+                <button onClick="{{ m.dl }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600">Download</button>
+              </div>
+            </sc-for>
+          </div>
+        </aside>
+      </div>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isDAct }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T15 Classroom Interaction activity" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#FFE4EC;color:#B8336A">Section D · {{ dAct.fmt }}</span>
+          <span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#F1EFEC;color:#3F3D45">{{ dClassName }} · {{ dAct.date }}</span>
+        </div>
+        <h1 style="margin:0;font-size:24px;font-weight:700;text-wrap:pretty">{{ dAct.topic }}</h1>
+        <span style="font-size:14px;color:#6B6873">Observing: {{ dFocusText }}</span>
+      </div>
+      <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600"><span>{{ dCount }} students observed</span><span style="color:#6B6873">{{ dLeft }}</span></div>
+        <span style="height:8px;border-radius:99px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:100%;width:{{ dPct }};background:#FF7900"></span></span>
+      </div>
+      <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+        <div style="padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <sc-for list="{{ dTabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.pick }}" style="cursor:pointer;white-space:nowrap;height:34px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:{{ t.weight }};border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }}">{{ t.label }} · {{ t.n }}</button>
+          </sc-for>
+          <span style="flex:1"></span>
+          <button onClick="{{ dMarkRest }}" style="display:{{ dMarkDisplay }};cursor:pointer;height:34px;padding:0 14px;border-radius:999px;border:1px solid #B55600;background:#FFF2E6;color:#B55600;font-size:13px;font-weight:500">Mark rest Developing</button>
+        </div>
+        <sc-for list="{{ dRows }}" as="r" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-top:1px solid #F1EFEC;flex-wrap:wrap">
+            <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px">{{ r.ini }}</span>
+            <span style="flex:1;min-width:140px;font-size:14px;font-weight:600">{{ r.name }}</span>
+            <span role="radiogroup" style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ r.levels }}" as="l" hint-placeholder-count="3">
+                <button role="radio" aria-checked="{{ l.on }}" onClick="{{ l.pick }}" style="cursor:pointer;height:34px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:{{ l.weight }};border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.fg }}">{{ l.label }}</button>
+              </sc-for>
+            </span>
+          </div>
+        </sc-for>
+        <sc-if value="{{ dEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:28px;text-align:center;font-size:13px;color:#6B6873;border-top:1px solid #F1EFEC">{{ dEmptyText }}</div>
+        </sc-if>
+      </div>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isActions }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T31 Action items" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px) clamp(0px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <h1 style="margin:0;font-size:24px;font-weight:700">Action items</h1>
+        <span style="font-size:14px;color:#6B6873">{{ actSub }}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ actChips }}" as="k" hint-placeholder-count="5">
+          <button onClick="{{ k.pick }}" style="cursor:pointer;white-space:nowrap;height:36px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:{{ k.weight }};border:1px solid {{ k.border }};background:{{ k.bg }};color:{{ k.fg }}">{{ k.label }} · {{ k.n }}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{ actGroups }}" as="gr" hint-placeholder-count="2">
+        <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+          <div style="padding:14px 20px;display:flex;align-items:center;gap:8px">
+            <span style="width:8px;height:8px;border-radius:50%;background:{{ gr.dot }}"></span>
+            <span style="font-size:15px;font-weight:600">{{ gr.title }}</span>
+            <span style="font-size:12px;color:#6B6873">{{ gr.count }}</span>
+          </div>
+          <sc-for list="{{ gr.items }}" as="a" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-top:1px solid #F1EFEC;flex-wrap:wrap">
+              <span style="width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:{{ a.chipBg }};color:{{ a.chipFg }}">{{ a.section }}</span>
+              <span style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:600;line-height:20px">{{ a.title }}</span>
+                <span style="font-size:12px;color:#6B6873">{{ a.meta }}</span>
+              </span>
+              <span style="font-size:12px;font-weight:600;white-space:nowrap;color:{{ a.dueFg }}">{{ a.due }}</span>
+              <button onClick="{{ a.go }}" style="flex:none;height:34px;padding:0 14px;border-radius:999px;border:1px solid #B55600;background:#FFF2E6;color:#B55600;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:#FFE4CC">{{ a.cta }}</button>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+      <sc-if value="{{ actEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:40px 20px;text-align:center;display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:16px;font-weight:600">You’re all caught up</span>
+          <span style="font-size:13px;color:#6B6873">Nothing needs your attention right now.</span>
+        </div>
+      </sc-if>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isHpc }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T30 Student HPC" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px) clamp(0px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <sc-if value="{{ hpcList }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:4px;padding:0 clamp(16px,0px,0px)">
+        <h1 style="margin:0;font-size:24px;font-weight:700">Student HPC</h1>
+        <span style="font-size:14px;color:#6B6873">View each learner’s Holistic Progress Card across the four sections.</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ hpcClasses }}" as="k" hint-placeholder-count="3">
+          <button onClick="{{ k.pick }}" style="cursor:pointer;white-space:nowrap;height:36px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:{{ k.weight }};border:1px solid {{ k.border }};background:{{ k.bg }};color:{{ k.fg }}">{{ k.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+        <sc-for list="{{ hpcStats }}" as="t" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:2px">
+            <span style="font-size:26px;font-weight:700;color:{{ t.fg }}">{{ t.v }}</span>
+            <span style="font-size:12px;color:#6B6873">{{ t.k }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;overflow:hidden">
+        <div style="padding:14px 16px;border-bottom:1px solid #F1EFEC;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:15px;font-weight:600;flex:1;min-width:120px">{{ hpcTitle }}</span>
+          <input value="{{ hpcQ }}" onInput="{{ setHpcQ }}" placeholder="Search student" style="height:36px;width:min(100%,240px);border:1px solid #E4E1DD;border-radius:8px;padding:0 12px;font-size:13px;outline:none">
+        </div>
+        <sc-for list="{{ hpcRows }}" as="r" hint-placeholder-count="5">
+          <button onClick="{{ r.open }}" style="width:100%;display:flex;align-items:center;gap:14px;padding:12px 16px;border:0;border-top:1px solid #F1EFEC;background:#fff;cursor:pointer;text-align:left;flex-wrap:wrap" style-hover="background:#FFFAF5">
+            <span style="width:38px;height:38px;flex:none;border-radius:50%;background:{{ r.av }};display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:#221F26">{{ r.ini }}</span>
+            <span style="display:flex;flex-direction:column;flex:1;min-width:130px">
+              <span style="font-size:14px;font-weight:600">{{ r.name }}</span>
+              <span style="font-size:12px;color:#6B6873">Roll {{ r.roll }}</span>
+            </span>
+            <span style="display:flex;gap:10px;flex:2;min-width:200px">
+              <sc-for list="{{ r.bars }}" as="b" hint-placeholder-count="4">
+                <span style="flex:1;display:flex;flex-direction:column;gap:4px">
+                  <span style="font-size:10px;font-weight:600;color:#6B6873">{{ b.code }}</span>
+                  <span style="height:6px;border-radius:99px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:100%;width:{{ b.w }};background:{{ b.c }}"></span></span>
+                </span>
+              </sc-for>
+            </span>
+            <span style="font-size:14px;font-weight:600;width:44px;text-align:right">{{ r.overall }}</span>
+            <span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:{{ r.chipBg }};color:{{ r.chipFg }};min-width:92px;text-align:center">{{ r.level }}</span>
+          </button>
+        </sc-for>
+        <sc-if value="{{ hpcEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:28px;text-align:center;font-size:13px;color:#6B6873;border-top:1px solid #F1EFEC">No students match your search.</div>
+        </sc-if>
+      </div>
+      </sc-if>
+      <sc-if value="{{ hpcDetail }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ hpcBack }}" style="align-self:flex-start;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600;padding:0 clamp(16px,0px,0px)">← All students · {{ hpcClsName }}</button>
+      <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <span style="width:56px;height:56px;flex:none;border-radius:50%;background:{{ d.av }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px">{{ d.ini }}</span>
+        <span style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">
+          <span style="font-size:20px;font-weight:700">{{ d.name }}</span>
+          <span style="font-size:13px;color:#6B6873">{{ hpcClsName }} · Roll {{ d.roll }}</span>
+        </span>
+        <span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span style="font-size:28px;font-weight:700">{{ d.overall }}</span>
+          <span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:{{ d.chipBg }};color:{{ d.chipFg }}">{{ d.level }} overall</span>
+        </span>
+      </section>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px">
+        <sc-for list="{{ d.sections }}" as="x" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:30px;height:30px;border-radius:8px;background:#FFF2E6;color:#B55600;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center">{{ x.code }}</span>
+              <span style="flex:1;font-size:15px;font-weight:600">{{ x.name }}</span>
+              <span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:{{ x.chipBg }};color:{{ x.chipFg }}">{{ x.level }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="height:8px;border-radius:99px;background:#F1EFEC;overflow:hidden"><span style="display:block;height:100%;width:{{ x.w }};background:{{ x.c }}"></span></span>
+              <span style="font-size:12px;color:#6B6873">{{ x.done }} of {{ x.total }} activities evaluated · {{ x.pct }}</span>
+            </div>
+            <span style="font-size:13px;line-height:19px;color:#3F3D45;text-wrap:pretty">{{ x.remark }}</span>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="T20 My Profile" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px) clamp(0px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <section style="position:relative;overflow:hidden;background:#FF7900;border-radius:{{ cardRadius }};padding:clamp(24px,3vw,36px) clamp(20px,3vw,36px);display:flex;align-items:center;gap:clamp(16px,2vw,24px);flex-wrap:wrap;color:#fff">
+        <span aria-hidden="true" style="position:absolute;top:0;right:0;bottom:0;width:42%;background:#FF8F2E;clip-path:polygon(38% 0,100% 0,100% 100%,0 100%)"></span>
+        <span style="position:relative;width:clamp(72px,8vw,96px);height:clamp(72px,8vw,96px);flex:none;border-radius:50%;background:#F4F2EF;color:#3F3D45;display:flex;align-items:center;justify-content:center;font-size:clamp(24px,2.6vw,32px);font-weight:500">AS</span>
+        <span style="position:relative;flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:4px">
+          <h1 style="margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.2;font-weight:700;color:#fff">Anjali Sharma</h1>
+          <span style="font-size:14px;color:#fff">Teacher code 120921004</span>
+        </span>
+      </section>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:start;padding:0 clamp(16px,2vw,0px)">
+        <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <h2 style="margin:0;font-size:18px;font-weight:600">Grade Details</h2>
+            <span style="font-size:13px;color:#64748B">You are teaching the following grades</span>
+          </div>
+          <div role="table" style="border:1px solid #F1EFEC;border-radius:10px;overflow:hidden">
+            <div role="row" style="display:grid;grid-template-columns:64px minmax(0,1fr) 52px;background:#FFE9D6;font-size:13px;font-weight:600">
+              <span role="columnheader" style="padding:12px 14px;border-right:1px solid #F5D9BF">Sl.No</span>
+              <span role="columnheader" style="padding:12px 14px">Grade Selected</span>
+              <span role="columnheader" style="padding:12px 14px"></span>
+            </div>
+            <sc-for list="{{ myGrades }}" as="gr" hint-placeholder-count="4">
+              <div role="row" style="display:grid;grid-template-columns:64px minmax(0,1fr) 52px;align-items:center;border-top:1px solid #F1EFEC;font-size:14px">
+                <span role="cell" style="padding:14px;align-self:stretch;display:flex;align-items:center;border-right:1px solid #F1EFEC;font-weight:600">{{ gr.n }}</span>
+                <span role="cell" style="padding:14px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font-weight:500;color:#3F3D45">{{ gr.label }}<span style="font-size:12px;font-weight:600;color:#1B6B34;display:{{ gr.liveDisplay }}">· Live</span></span>
+                <span role="cell" style="display:flex;justify-content:center">
+                  <button onClick="{{ gr.remove }}" aria-label="{{ gr.removeLabel }}" style="width:36px;height:36px;border:0;border-radius:8px;background:none;cursor:pointer;color:#B54A45;display:flex;align-items:center;justify-content:center" style-hover="background:#FBEDEC">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg>
+                  </button>
+                </span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noGrades }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:24px 14px;text-align:center;font-size:13px;color:#6B6873;border-top:1px solid #F1EFEC">No grades added yet. Add the grades you run HPC activities for.</div>
+            </sc-if>
+          </div>
+          <button onClick="{{ openAdd }}" style="height:48px;border-radius:999px;border:1px solid #FFC999;background:#FFE0C2;color:#B55600;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px" style-hover="background:#FFD3AB"><span style="font-size:20px;line-height:1;font-weight:400">+</span> Select another grade</button>
+        </section>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#221F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M3 9.5 12 4l9 5.5M4 20h16M5 10v8M9.5 10v8M14.5 10v8M19 10v8"></path></svg>
+              <h2 style="margin:0;font-size:18px;font-weight:600;flex:1">School Information</h2>
+              <span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;background:#E8EEFF;color:#3653B8"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"></path></svg>VSK synced</span>
+            </div>
+            <dl style="margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px">
+              <sc-for list="{{ schoolRows }}" as="r" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;gap:2px;grid-column:{{ r.span }}">
+                  <dt style="font-size:13px;color:#64748B">{{ r.k }}</dt>
+                  <dd style="margin:0;font-size:15px;font-weight:600;color:#221F26">{{ r.v }}</dd>
+                </div>
+              </sc-for>
+            </dl>
+            <span style="font-size:12px;color:#6B6873">Synced from VSK. Ask your school head to correct any detail.</span>
+          </section>
+          <section style="background:#fff;border:1px solid #E4E1DD;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 style="margin:0;font-size:18px;font-weight:600">Language · भाषा</h2>
+              <span style="font-size:13px;color:#6B6873">Choose the language for the app and student-facing text.</span>
+            </div>
+            <div role="radiogroup" aria-label="Language" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+              <sc-for list="{{ langs }}" as="l" hint-placeholder-count="2">
+                <button role="radio" aria-checked="{{ l.on }}" onClick="{{ l.pick }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;text-align:left;border:1.5px solid {{ l.border }};background:{{ l.bg }};color:#221F26" style-hover="border-color:#B55600">
+                  <span style="width:20px;height:20px;flex:none;border-radius:50%;border:2px solid {{ l.border }};display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;background:#FF7900;display:{{ l.dot }}"></span></span>
+                  <span style="display:flex;flex-direction:column;gap:1px">
+                    <span style="font-size:15px;font-weight:600">{{ l.name }}</span>
+                    <span style="font-size:12px;color:#6B6873">{{ l.sub }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+          <button onClick="{{ openPolicies }}" style="text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;padding:16px 20px;border:1px solid #E4E1DD;border-radius:16px;background:#fff;color:#221F26;font-size:15px;font-weight:600" style-hover="border-color:#B55600">
+            <span style="flex:1">About &amp; policies</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B55600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg>
+          </button>
+          <button onClick="{{ logOut }}" style="align-self:center;display:flex;align-items:center;gap:8px;border:0;background:none;cursor:pointer;padding:10px 16px;border-radius:999px;font-size:15px;font-weight:600;color:#B54A45" style-hover="background:#FBEDEC">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"></path></svg>Log Out
+          </button>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+
+    <sc-if value="{{ isEval }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="{{ evalLabel }}" style="width:100%;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px) clamp(0px,3vw,32px) 48px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:0 clamp(16px,2vw,0px)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <h1 style="margin:0;font-size:clamp(22px,2.2vw,28px);line-height:1.2;font-weight:600">Evaluate {{ eg.name }}</h1>
+          <span style="font-size:13px;color:#6B6873">{{ evalSub }}</span>
+        </div>
+        <ol aria-label="Rubric progress" style="margin:0;padding:0;list-style:none;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <sc-for list="{{ evalTabs }}" as="et" hint-placeholder-count="4">
+            <li><button onClick="{{ et.go }}" style="cursor:pointer;height:32px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;border:1px solid {{ et.border }};background:{{ et.bg }};color:{{ et.fg }}">{{ et.label }}</button></li>
+          </sc-for>
+        </ol>
+      </div>
+      <div style="background:#fff;border:1px solid #E4E1DD;border-radius:{{ cardRadius }};overflow:hidden;display:flex;flex-direction:column">
+        <div style="display:grid;grid-template-columns:{{ evalCols }}">
+          <div style="padding:20px;background:#FFFBF9;border-right:1px solid {{ splitBorder }};border-bottom:1px solid {{ splitBorderB }};display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#B54A45;background:{{ eg.color }}">{{ eg.code }}</span>
+              <span style="display:flex;flex-direction:column">
+                <span style="font-size:15px;font-weight:600">{{ eg.name }}</span>
+                <span style="font-size:12px;color:#6B6873">{{ eg.countText }}</span>
+              </span>
+            </div>
+            <div style="display:{{ eg.membersDisplay }};flex-direction:column;gap:6px">
+              <sc-for list="{{ eg.memberList }}" as="m" hint-placeholder-count="5">
+                <span style="display:flex;align-items:center;gap:8px;font-size:13px">
+                  <span style="width:24px;height:24px;border-radius:50%;background:#F1EFEC;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;color:#3F3D45">{{ m.initials }}</span>{{ m.name }}
+                </span>
+              </sc-for>
+            </div>
+            <div style="border:1px solid #E4E1DD;border-radius:12px;padding:12px;background:#fff;display:flex;flex-direction:column;gap:4px">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.8px;color:#6B6873">SUBMISSION · {{ eg.subMode }}</span>
+              <span style="display:{{ eg.fileDisplay }};align-items:center;gap:8px;padding:8px 0 4px"><span style="width:32px;height:32px;flex:none;border-radius:8px;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">{{ eg.fileExt }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-size:13px;font-weight:600;word-break:break-all">{{ eg.fileName }}</span><span style="font-size:11px;color:#6B6873">{{ eg.fileSize }}</span></span><button onClick="{{ viewEvFile }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:12px;font-weight:600;color:#B55600;padding:0">View</button></span>
+              <span style="font-size:13px;font-weight:500;line-height:19px;word-break:break-word">{{ eg.subValue }}</span>
+              <span style="font-size:11px;color:#6B6873">Recorded {{ eg.subAt }}</span>
+            </div>
+          </div>
+          <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:18px;min-width:0">
+            <sc-if value="{{ isRubricStep }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:12px;font-weight:600;color:#B55600">{{ dimStep }}</span>
+                <h2 style="margin:0;font-size:20px;font-weight:600">{{ dim.label }}</h2>
+                <span style="font-size:13px;color:#6B6873">{{ tickHelp }}</span>
+              </div>
+              <div role="group" style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ dimRows }}" as="d" hint-placeholder-count="4">
+                  <button role="checkbox" onClick="{{ d.toggle }}" style="text-align:left;cursor:pointer;display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:12px;border:1px solid {{ d.border }};background:{{ d.bg }}" style-hover="border-color:#E86E00">
+                    <span style="width:20px;height:20px;flex:none;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:{{ d.checkBg }};border:1px solid {{ d.checkBorder }}">{{ d.mark }}</span>
+                    <span style="font-size:14px;line-height:20px;font-weight:500">{{ d.text }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <span style="font-size:12px;color:#6B6873">{{ dimCount }}</span>
+            </sc-if>
+            <sc-if value="{{ isFeedbackStep }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:12px;font-weight:600;color:#B55600">Step 4 of 4</span>
+                <h2 style="margin:0;font-size:20px;font-weight:600">{{ fbTitle }}</h2>
+                <span style="font-size:13px;color:#6B6873">They will see this once it is released.</span>
+              </div>
+              <textarea onChange="{{ setFeedback }}" value="{{ feedback }}" placeholder="e.g. Good, clear plan and you have chosen a real problem." style="min-height:120px;resize:vertical;border:1px solid #E4E1DD;border-radius:10px;padding:12px 14px;font-size:14px;line-height:21px;color:#221F26"></textarea>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Support needed <span style="font-weight:400;color:#6B6873">(optional, only you see this)</span>
+                <textarea onChange="{{ setIntervention }}" value="{{ intervention }}" placeholder="e.g. Help Sahil speak up during the final presentation." style="min-height:80px;resize:vertical;border:1px solid #E4E1DD;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:400;line-height:21px;color:#221F26"></textarea>
+              </label>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+                <sc-for list="{{ rubricRecap }}" as="rr" hint-placeholder-count="3">
+                  <div style="border:1px solid #E4E1DD;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column">
+                    <span style="font-size:12px;color:#6B6873">{{ rr.k }}</span>
+                    <span style="font-size:15px;font-weight:600">{{ rr.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ evC }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid #FFB877;border-radius:10px;background:#FFF7EF;font-size:13px;line-height:19px;color:#3F3D45">
+                  <span style="width:18px;height:18px;flex:none;border-radius:50%;border:1.5px solid #B55600;color:#B55600;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px">!</span>
+                  <span><strong style="font-weight:600;color:#B55600">Once saved, this evaluation can’t be edited.</strong> Check your ticks and feedback before you save.</span>
+                </div>
+              </sc-if>
+            </sc-if>
+          </div>
+        </div>
+        <div style="position:sticky;bottom:{{ footerBottom }};display:flex;align-items:center;gap:12px;padding:14px clamp(16px,3vw,32px);border-top:1px solid #E4E1DD;background:#fff">
+          <button onClick="{{ goActivity }}" style="border:0;background:none;cursor:pointer;font-size:14px;font-weight:500;color:#6B6873;padding:0" style-hover="color:#221F26">Cancel</button>
+          <span style="flex:1"></span>
+          <button onClick="{{ evalPrev }}" style="height:44px;padding:0 20px;border-radius:999px;border:1px solid #E4E1DD;background:#fff;color:#221F26;font-size:14px;font-weight:500;cursor:pointer;display:{{ evalPrevDisplay }}" style-hover="border-color:#B55600">Previous</button>
+          <button onClick="{{ evalNext }}" style="flex:none;white-space:nowrap;height:44px;padding:0 24px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:pointer;background:#FF7900;color:#fff" style-hover="background:#E86E00">{{ evalNextLabel }}</button>
+        </div>
+      </div>
+    </main>
+    </sc-if>
+  </div>
+</div>
+
+<sc-if value="{{ recOpen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="T11 Record submission" style="position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end;align-items:{{ drawerAlign }}">
+  <button aria-label="Close" onClick="{{ closeRec }}" style="position:absolute;inset:0;border:0;background:rgba(34,31,38,.42);cursor:default"></button>
+  <div role="dialog" aria-modal="true" style="position:relative;width:{{ drawerW }};max-height:{{ drawerMaxH }};height:{{ drawerH }};background:#fff;display:flex;flex-direction:column;border-radius:{{ drawerRadius }}">
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:20px 24px;border-bottom:1px solid #F1EFEC">
+      <span style="flex:1;display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:18px;font-weight:600">Record {{ rg.name }}’s submission</span>
+        <span style="font-size:12px;color:#6B6873">{{ rg.members }}</span>
+      </span>
+      <button onClick="{{ closeRec }}" aria-label="Close" style="width:36px;height:36px;border:0;border-radius:8px;background:none;cursor:pointer;font-size:18px;color:#6B6873" style-hover="background:#F1EFEC">✕</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:13px;font-weight:600">How did they submit?</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ recModes }}" as="rm" hint-placeholder-count="2">
+            <button onClick="{{ rm.go }}" style="text-align:left;cursor:pointer;padding:12px 14px;border-radius:12px;display:flex;flex-direction:column;gap:2px;border:1px solid {{ rm.border }};background:{{ rm.bg }}">
+              <span style="font-size:14px;font-weight:600;color:{{ rm.fg }}">{{ rm.label }}</span>
+              <span style="font-size:12px;color:#6B6873">{{ rm.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <sc-if value="{{ recDigital }}" hint-placeholder-val="{{ true }}">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Link to their work
+          <input value="{{ recLink }}" onChange="{{ setRecLink }}" placeholder="Paste a Drive, YouTube or DIKSHA link" style="height:48px;border:1px solid #E4E1DD;border-radius:8px;padding:0 14px;font-size:14px;font-weight:400;color:#221F26">
+        </label>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px;border:1px dashed #CDCACB;border-radius:12px;background:#F1EFEC;text-align:center">
+          <span style="font-size:13px;font-weight:600">Or upload photos / PDF</span>
+          <span style="font-size:12px;color:#6B6873">Up to 5 files · 10 MB each</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ recOffline }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">What did they hand in?
+          <input value="{{ recLink }}" onChange="{{ setRecLink }}" placeholder="e.g. Poster and water-test chart" style="height:48px;border:1px solid #E4E1DD;border-radius:8px;padding:0 14px;font-size:14px;font-weight:400;color:#221F26">
+          <span style="font-size:12px;font-weight:400;color:#6B6873">Keep the physical work until evaluation is done.</span>
+        </label>
+      </sc-if>
+    </div>
+    <div style="display:flex;gap:10px;padding:14px 24px 18px;border-top:1px solid #F1EFEC">
+      <button onClick="{{ closeRec }}" style="flex:1;height:46px;border-radius:999px;border:1px solid #E4E1DD;background:#fff;font-size:14px;font-weight:500;cursor:pointer">Cancel</button>
+      <button onClick="{{ saveRec }}" style="flex:1;height:46px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:{{ recCursor }};background:{{ recBg }};color:{{ recFg }}">Save submission</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ csubOpen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="T14 Student submission" style="position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end;align-items:{{ drawerAlign }}">
+  <button aria-label="Close" onClick="{{ closeCsub }}" style="position:absolute;inset:0;border:0;background:rgba(34,31,38,.42);cursor:default"></button>
+  <div role="dialog" aria-modal="true" style="position:relative;width:{{ drawerW }};max-height:{{ drawerMaxH }};height:{{ drawerH }};background:#fff;display:flex;flex-direction:column;border-radius:{{ drawerRadius }}">
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:20px 24px;border-bottom:1px solid #F1EFEC">
+      <span style="flex:1;display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:18px;font-weight:600">{{ cs.name }}’s submission</span>
+        <span style="font-size:12px;color:#6B6873">Student ID {{ cs.sid }} · {{ cClassName }}</span>
+      </span>
+      <button onClick="{{ closeCsub }}" aria-label="Close" style="width:36px;height:36px;border:0;border-radius:8px;background:none;cursor:pointer;font-size:18px;color:#6B6873" style-hover="background:#F1EFEC">✕</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #E4E1DD;border-radius:12px">
+        <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#E3F5E1;color:#1B6B34;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">✓</span>
+        <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <span style="font-size:14px;font-weight:600">{{ cs.statusTitle }}</span>
+          <span style="font-size:12px;color:#6B6873">Submitted {{ cs.at }} · Filled by student</span>
+        </span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.96px;color:#E86E00">FILES</span>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #E4E1DD;border-radius:12px">
+          <span style="width:36px;height:36px;flex:none;border-radius:8px;background:#FFF2E6;color:#B55600;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">{{ cs.ext }}</span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+            <span style="font-size:13px;font-weight:600;word-break:break-all">{{ cs.file }}</span>
+            <span style="font-size:11px;color:#6B6873">{{ cs.size }}</span>
+          </span>
+          <button onClick="{{ viewCsFile }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600">View</button>
+          <button onClick="{{ dlCsFile }}" style="flex:none;border:0;background:none;cursor:pointer;font-size:13px;font-weight:600;color:#B55600">Download</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:12px;font-weight:700;letter-spacing:.96px;color:#E86E00">DESCRIPTION</span>
+        <p style="margin:0;padding:12px 14px;border-radius:10px;background:#F7F5F2;font-size:14px;line-height:21px;text-wrap:pretty">{{ cs.desc }}</p>
+      </div>
+      <sc-if value="{{ csEvaluated }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:12px;font-weight:700;letter-spacing:.96px;color:#E86E00">YOUR EVALUATION</span>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+            <sc-for list="{{ csRecap }}" as="rr" hint-placeholder-count="3">
+              <div style="border:1px solid #E4E1DD;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column">
+                <span style="font-size:12px;color:#6B6873">{{ rr.k }}</span>
+                <span style="font-size:15px;font-weight:600">{{ rr.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:0;padding:12px 14px;border:1px solid #E4E1DD;border-radius:10px;font-size:14px;line-height:21px;text-wrap:pretty">{{ csFeedback }}</p>
+          <span style="font-size:12px;color:#6B6873">Saved evaluations can’t be edited.</span>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;gap:10px;padding:14px 24px 18px;border-top:1px solid #F1EFEC">
+      <button onClick="{{ closeCsub }}" style="flex:1;height:46px;border-radius:999px;border:1px solid #E4E1DD;background:#fff;font-size:14px;font-weight:500;cursor:pointer">Close</button>
+      <button onClick="{{ evalFromCsub }}" style="flex:1;height:46px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:pointer;background:#FF7900;color:#fff;display:{{ cs.evalDisplay }}" style-hover="background:#E86E00">Evaluate</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ rmOpen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="{{ rmLabel }}" style="position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;padding:16px">
+  <button aria-label="Close" onClick="{{ closeRm }}" style="position:absolute;inset:0;border:0;background:rgba(34,31,38,.42);cursor:default"></button>
+  <div role="alertdialog" aria-modal="true" style="position:relative;width:100%;max-width:420px;background:#fff;border-radius:18px;padding:28px 24px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+    <span style="width:56px;height:56px;border-radius:50%;background:#FFF2E6;color:#E86E00;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;border:0">!</span>
+    <h2 style="margin:6px 0 0;font-size:19px;font-weight:600;text-wrap:pretty">{{ rmTitle }}</h2>
+    <p style="margin:0;font-size:14px;line-height:21px;color:#6B6873;text-wrap:pretty">{{ rmBody }}</p>
+    <div style="width:100%;display:{{ rmListDisplay }};flex-direction:column;gap:6px;margin-top:6px">
+      <sc-for list="{{ rmList }}" as="li" hint-placeholder-count="3">
+        <span style="text-align:left;padding:10px 12px;border-radius:8px;background:#F7F5F2;font-size:13px">{{ li.t }} · <strong style="font-weight:600;color:#1B6B34">Live</strong></span>
+      </sc-for>
+    </div>
+    <div style="width:100%;display:flex;gap:10px;margin-top:12px">
+      <button onClick="{{ closeRm }}" style="flex:1;height:46px;border-radius:999px;font-size:14px;cursor:pointer;border:1px solid {{ rmCancelBorder }};background:{{ rmCancelBg }};color:{{ rmCancelFg }};font-weight:{{ rmCancelWeight }}">{{ rmCancelLabel }}</button>
+      <button onClick="{{ confirmRm }}" style="flex:1;height:46px;border-radius:999px;border:0;background:#B54A45;color:#fff;font-size:14px;font-weight:600;cursor:pointer;display:{{ rmConfirmDisplay }}">Remove</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ addOpen }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="T21 Select another grade" style="position:fixed;inset:0;z-index:45;display:flex;align-items:{{ addAlign }};justify-content:center;padding:{{ addPad }}">
+  <button aria-label="Close" onClick="{{ closeAdd }}" style="position:absolute;inset:0;border:0;background:rgba(34,31,38,.42);cursor:default"></button>
+  <div role="dialog" aria-modal="true" style="position:relative;width:100%;max-width:520px;max-height:{{ addMaxH }};background:#fff;border-radius:{{ addRadius }};display:flex;flex-direction:column;overflow:hidden">
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:20px 24px 14px">
+      <span style="flex:1;display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:18px;font-weight:600">Select another grade</span>
+        <span style="font-size:13px;color:#6B6873">Pick the grades and sections you’ll run HPC activities for.</span>
+      </span>
+      <button onClick="{{ closeAdd }}" aria-label="Close" style="width:36px;height:36px;border:0;border-radius:8px;background:none;cursor:pointer;font-size:18px;color:#6B6873" style-hover="background:#F1EFEC">✕</button>
+    </div>
+    <label style="display:flex;align-items:center;gap:10px;height:44px;margin:0 24px 8px;padding:0 14px;border:1px solid #E4E1DD;border-radius:999px;color:#6B6873">
+      <span style="font-size:16px">⌕</span>
+      <input value="{{ addQuery }}" onChange="{{ setAddQuery }}" placeholder="Search grades, e.g. 11 Science" style="flex:1;min-width:0;border:0;outline:none;font-size:14px;color:#221F26;background:transparent">
+    </label>
+    <div role="group" style="flex:1;overflow-y:auto;padding:4px 16px 12px;display:flex;flex-direction:column">
+      <sc-for list="{{ addOpts }}" as="o" hint-placeholder-count="6">
+        <button role="checkbox" aria-checked="{{ o.on }}" onClick="{{ o.toggle }}" style="text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 8px;border:0;border-bottom:1px solid #F1EFEC;background:#fff" style-hover="background:#FFFAF5">
+          <span style="width:20px;height:20px;flex:none;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;background:{{ o.checkBg }};border:1px solid {{ o.checkBorder }}">{{ o.mark }}</span>
+          <span style="flex:1;font-size:14px;font-weight:500;color:#221F26">{{ o.label }}</span>
+          <span style="font-size:12px;color:#6B6873">{{ o.students }} students</span>
+        </button>
+      </sc-for>
+      <sc-if value="{{ addEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:24px 8px;text-align:center;font-size:13px;color:#6B6873">{{ addEmptyText }}</div>
+      </sc-if>
+    </div>
+    <div style="display:flex;gap:10px;padding:14px 24px 18px;border-top:1px solid #F1EFEC">
+      <button onClick="{{ closeAdd }}" style="flex:1;height:46px;border-radius:999px;border:1px solid #E4E1DD;background:#fff;font-size:14px;font-weight:500;cursor:pointer">Cancel</button>
+      <button onClick="{{ saveAdd }}" style="flex:1;height:46px;border-radius:999px;border:0;font-size:14px;font-weight:600;cursor:{{ addCursor }};background:{{ addBg }};color:{{ addFg }}">{{ addLabel }}</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position:fixed;left:50%;bottom:{{ toastBottom }};transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;background:#221F26;color:#fff;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap">
+  <span style="color:#7BD88F;font-weight:700">✓</span>{{ toast }}
+</div>
+</sc-if>
+
+<sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+<nav style="position:fixed;left:0;right:0;bottom:0;z-index:20;height:68px;display:grid;grid-template-columns:repeat(5,1fr);background:#FFFBF9;border-top:1px solid #E4E1DD">
+  <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+    <button onClick="{{ n.go }}" style="border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:{{ n.weight }};color:{{ n.fg }}">
+      {{ n.iconEl }}
+      <span style="white-space:nowrap">{{ n.short }}</span>
+    </button>
+  </sc-for>
+</nav>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAMES = ['Aarav Sharma', 'Neha Sharma', 'Karan Negi', 'Priya Thakur', 'Rohit Chauhan', 'Riya Thakur', 'Aman Verma', 'Pooja Kumari', 'Sahil Chauhan', 'Megha Rana', 'Kavya Verma', 'Ankit Rana', 'Sakshi Negi', 'Vikas Sharma', 'Ishaan Thakur'];
+const GCOL = ['#CBEDF4', '#FFC1D6', '#FFF1D0', '#BFC3FB'];
+const RUBRIC = [
+  { key: 'awareness', label: 'Awareness', statements: ['Names the specific local problem the project addresses', 'Explains why the problem matters to their community', 'Connects the problem to a wider cause', 'References at least one source of information used'] },
+  { key: 'sensitivity', label: 'Sensitivity', statements: ['Considers how the problem affects different people', 'Listens to and includes other points of view', 'Suggests a response that is fair to those affected', 'Shows respect when talking about the community'] },
+  { key: 'creativity', label: 'Creativity', statements: ['Proposes an idea of their own, not only a copied one', 'Uses a clear way to present the work (chart, model, story)', 'Tries more than one approach before settling', 'Explains how the idea could be improved'] }];
+const TOPICS = [
+  { id: 'water', title: 'Water in my village', subject: 'Social Science', why: 'Students work in teams on a real problem in their village, building planning, observation and communication skills.', outcome: 'Investigates a local issue using evidence', competency: 'Environmental awareness · collaboration', pedagogy: 'Inquiry-based, group' },
+  { id: 'garden', title: 'Our school garden', subject: 'Science', why: 'Students plan, grow and track a small garden patch together and present what they learnt.', outcome: 'Plans and records a long-running experiment', competency: 'Scientific thinking · collaboration', pedagogy: 'Project-based, group' }];
+const C_TOPICS = [
+  { id: 'energy', title: 'Clean energy for my school', subject: 'Science', why: 'Each student proposes their own solution to a real problem, building research and creative thinking.', outcome: 'Proposes a workable solution to a local problem', competency: 'Problem solving · creativity', pedagogy: 'Inquiry-based, individual' },
+  { id: 'waste', title: 'Less waste in our canteen', subject: 'Social Science', why: 'Each student studies how waste is made in the school canteen and proposes one way to cut it.', outcome: 'Uses observation to suggest a practical change', competency: 'Problem solving · civic sense', pedagogy: 'Inquiry-based, individual' },
+  { id: 'road', title: 'A safer road to school', subject: 'Social Science', why: 'Each student maps one risk on their way to school and proposes a fix the panchayat could make.', outcome: 'Identifies a local risk and proposes a response', competency: 'Problem solving · communication', pedagogy: 'Inquiry-based, individual' }];
+const sub = (file, size, desc, at) => ({ file, size, desc, at });
+const SEED_C = { title: 'Clean energy for my school', topic: 'energy', cls: '12A', deadline: '16 Sep', nudged: {},
+  subs: { 'Aarti Sood': sub('aarti-solar-plan.pdf', '1.2 MB', 'Solar panels on the staff-room roof to power the computer lab lights.', '2 Sep, 4:10 pm'), 'Abhishek Chandel': sub('abhishek-wind-turbine.pdf', '1.5 MB', 'A small wind turbine on the school roof to run the fans in summer.', '3 Sep, 9:25 am'), 'Ankit Pathania': sub('switch-off-monitors.jpg', '820 KB', 'Two switch-off monitors in each class who turn off lights and fans at every break.', '4 Sep, 6:02 pm'), 'Isha Chauhan': sub('isha-biogas-pit.pdf', '2.1 MB', 'A biogas pit that uses canteen food waste to cook the mid-day meal.', '5 Sep, 11:40 am'), 'Karan Verma': sub('karan-led-bill.pdf', '940 KB', 'Replace old tube lights with LEDs and track the electricity bill for three months.', '5 Sep, 3:15 pm'), 'Kavya Thakur': sub('solar-heater-sketch.jpg', '1.1 MB', 'A solar water heater for the hostel made from old black pipes.', '7 Sep, 8:50 am'), 'Megha Rana': sub('daylight-poster.jpg', '760 KB', 'A poster campaign asking families to use daylight instead of bulbs till 6 pm.', '8 Sep, 5:30 pm') },
+  evals: { 'Aarti Sood': { checks: { awareness: [0, 1, 3], sensitivity: [0, 1], creativity: [0, 1, 2] }, feedback: 'Clear plan with real numbers. Next, find out what the panels would cost.', at: '5 Sep' }, 'Karan Verma': { checks: { awareness: [0, 1, 2, 3], sensitivity: [1], creativity: [1, 3] }, feedback: 'Good idea to track the bill. Share the results with the class in October.', at: '7 Sep' } } };
+const ROSTER = ['Aarti Sood', 'Abhishek Chandel', 'Ankit Pathania', 'Isha Chauhan', 'Karan Verma', 'Kavya Thakur', 'Megha Rana', 'Neha Sharma', 'Nikhil Katoch', 'Pooja Kumari', 'Priya Negi', 'Rohit Chauhan', 'Sahil Guleria', 'Tanvi Rana', 'Vikas Sharma'];
+const initials = n => n.split(' ').map(x => x[0]).join('').slice(0, 2);
+const roster = (n, seed) => { const base = NAMES.slice(0, n); return seed ? base.map((_, i) => base[(i * 11 + seed) % n]) : base; };
+const chunk = (arr, size) => { const out = []; for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size)); if (out.length > 1 && out[out.length - 1].length < Math.ceil(size / 2)) { const last = out.pop(); last.forEach((m, i) => out[i % out.length].push(m)); } return out; };
+const mkGroups = lists => lists.map((members, i) => ({ id: 'g' + (i + 1), code: 'G' + (i + 1), name: 'Group ' + (i + 1), color: GCOL[i % 4], members }));
+const SEED_ACT = { title: 'Water in my village', topic: 'water', cls: '9A', deadline: '15 Sep', groups: mkGroups(chunk(NAMES, 5)), subs: { g1: { mode: 'Digital', value: 'drive.example.com/g1-water-report', at: '8 Sep, 3:40 pm' }, g3: { mode: 'Offline', value: 'Poster and water-test chart', at: '9 Sep, 11:10 am' } }, evals: { g1: { count: 9, at: '8 Sep' } } };
+
+class Component extends DCLogic {
+  state = { screen: localStorage.getItem('hpct3-screen') || 'home', cls: '9A', type: null, survey: 'a2', topic: 'water', size: 5, mgroups: [], picks: [], search: '', gtab: 'create', held: false, launched: null, act: SEED_ACT, filter: 'all', rec: null, recMode: 'Digital', recLink: '', evalG: 'g3', evalStep: 0, checks: {}, feedback: '', intervention: '', toast: '', w: window.innerWidth, ctopic: 'energy', cact: SEED_C, cfilter: 'toeval', csub: null, evKind: 'B', evalS: null, myClasses: ['9A', '10A', '11B', '12A'], rmCls: null, addOpen: false, addPicks: [], addQuery: '' };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearTimeout(this.tt); }
+  go(screen, extra) { localStorage.setItem('hpct3-screen', screen); this.setState({ screen, ...(extra || {}) }); window.scrollTo(0, 0); }
+  flash(toast) { clearTimeout(this.tt); this.setState({ toast }); this.tt = setTimeout(() => this.setState({ toast: '' }), 2600); }
+  renderVals() {
+    const S = this.state, { screen, cls, type, survey, topic, size, held, launched, act, filter, rec, recMode, recLink, evalG, evalStep, checks, w } = S;
+    const wide = w >= 960, g = s => () => this.go(s);
+    const tone = { A: ['#E8EEFF', '#3653B8'], B: ['#E8EEFF', '#3653B8'], C: ['#EFE8FF', '#6A3FC4'], D: ['#FFE4EC', '#B8336A'] };
+    const ALLC = [
+      { id: '9A', short: '9 A', name: 'Class 9 A', stream: 'General', students: 15, live: 3, review: 2, bg: '#BFC3FB' },
+      { id: '10A', short: '10 A', name: 'Class 10 A', stream: 'General', students: 14, live: 1, review: 0, bg: '#FFC1D6' },
+      { id: '11B', short: '11 B', name: 'Class 11 B', stream: 'Humanities', students: 12, live: 1, review: 1, bg: '#FFF1D0' },
+      { id: '12A', short: '12 A', name: 'Class 12 A', stream: 'Science', students: 13, live: 0, review: 1, bg: '#CBEDF4' },
+      { id: '9B', short: '9 B', name: 'Class 9 B', stream: 'General', students: 14, live: 0, review: 0, bg: '#FFF1D0' },
+      { id: '10B', short: '10 B', name: 'Class 10 B', stream: 'General', students: 13, live: 0, review: 0, bg: '#CBEDF4' },
+      { id: '11A', short: '11 A', name: 'Class 11 A', stream: 'Science', students: 12, live: 0, review: 0, bg: '#BFC3FB' },
+      { id: '11C', short: '11 C', name: 'Class 11 C', stream: 'Commerce', students: 11, live: 0, review: 0, bg: '#FFC1D6' },
+      { id: '12B', short: '12 B', name: 'Class 12 B', stream: 'Commerce', students: 12, live: 0, review: 0, bg: '#FFF1D0' }];
+    const myClasses = S.myClasses || [];
+    const classes = ALLC.filter(x => myClasses.includes(x.id));
+    const c = classes.find(x => x.id === cls) || classes[0] || ALLC[0];
+    const clsName = id => (ALLC.find(x => x.id === id) || ALLC[0]).name;
+    const gLabel = x => 'Grade ' + x.short.replace(' ', '-') + (x.stream !== 'General' ? ' · ' + x.stream : '');
+    const typeList = [
+      ['A', 'Know Myself', 'Guide learners through reflection & planning surveys on goals, time management and future plans.', 'Individual · surveys'],
+      ['B', 'Group Project', 'Set up a shared project where learners work and compete in teams.', 'Teams · 3 stages'],
+      ['C', 'Problem Based Enquiry', 'Individual tasks that ask learners to propose solutions to a real-world issue.', 'Individual · submission'],
+      ['D', 'Class Interaction', 'Plan and observe a discussion, debate, experiment, role-play or presentation.', 'Whole class · observed']];
+    const svs = [
+      { id: 'a1', code: 'A1', title: 'Information & interests', status: 'done' },
+      { id: 'a2', code: 'A2', title: 'Goal setting', competency: 'Self-management', why: 'A reflection on the marks students want to reach this year and the effort they will put in.', steps: ['Ask the class to think of one subject they want to get better at.', 'Explain that no answer is right or wrong and that this is not marked.', 'Tell them the deadline you are about to set.'], questions: [['Which subject do you want to improve most this year?', ['Mathematics', 'Science', 'English', 'Hindi']], ['How many hours a week will you study it at home?', ['Less than 2', '2–4', '4–6', 'More than 6']], ['Who can help you reach this goal?', ['Teacher', 'Parents', 'Friends', 'On my own']]] },
+      { id: 'a3', code: 'A3', title: 'How I learn', status: 'live' },
+      { id: 'a4', code: 'A4', title: 'Plans after school', competency: 'Career awareness', why: 'A reflection on what students hope to do after school and how sure they feel about it.', steps: ['Ask two or three students what they want to do after Class 12.', 'Explain that no answer is right or wrong and that this is not marked.', 'Tell them the deadline you are about to set.'], questions: [['How sure are you about what you want to do after school?', ['Very sure', 'Somewhat sure', 'Not very sure', 'Not sure at all']], ['Who have you talked to about your plans?', ['Parents', 'Teachers', 'Friends', 'No one yet']]] },
+      { id: 'a5', code: 'A5', title: 'Accomplishments', status: 'na' }];
+    const sv = svs.find(s => s.id === survey) || svs[1];
+    const tp = TOPICS.find(t => t.id === topic);
+    const classRoster = ROSTER.slice(0, c.students);
+    const mgroups = S.mgroups || [], picks = S.picks || [];
+    const wizGroups = mkGroups(mgroups);
+    const assigned = mgroups.flat(), unassigned = classRoster.filter(n => !assigned.includes(n));
+    const target = Math.min(size, unassigned.length);
+    const q = (S.search || '').trim().toLowerCase();
+    const poolList = unassigned.filter(n => !q || n.toLowerCase().includes(q));
+    const flowA = ['step1', 'a2', 'live', 'done'], flowB = ['step1', 'b2', 'b3', 'live', 'done'], flowC = ['step1', 'c2', 'live', 'done'], flowD = ['step1', 'd2', 'live', 'done'];
+    const isC = type === 'C', ctp = C_TOPICS.find(t => t.id === S.ctopic) || C_TOPICS[0];
+    const isD = type === 'D';
+    const flow = type === 'B' ? flowB : isC ? flowC : isD ? flowD : flowA;
+    const stepNames = type === 'B' ? ['Class & type', 'Topic', 'Groups', 'Make live'] : isC ? ['Class & type', 'Topic', 'Make live'] : isD ? ['Class & type', 'Plan', 'Make live'] : ['Class & type', 'Choose survey', 'Make live'];
+    const typeName = { A: 'Know Myself', B: 'Group Project', C: 'Problem Based Enquiry', D: 'Classroom Interaction' }[type] || '';
+    const cact = S.cact, cfilter = S.cfilter;
+    const DFOC = [['Participation', 'Takes part and shares ideas'], ['Listening', 'Attends to and builds on others’ points'], ['Expression of ideas', 'Explains thinking clearly'], ['Teamwork', 'Works respectfully with classmates']];
+    const DFMT = ['Discussion', 'Debate', 'Experiment', 'Role-play', 'Presentation'];
+    const DLV = ['Beginning', 'Developing', 'Proficient'];
+    const dfmt = S.dfmt || 'Discussion', dtopic = S.dtopic == null ? '' : S.dtopic, dfocus = S.dfocus || ['Participation', 'Listening', 'Expression of ideas'];
+    const dact = S.dact || { fmt: 'Debate', topic: 'Plastic ban debate', cls: '10A', date: '8 Sep', focus: ['Participation', 'Listening', 'Expression of ideas'], obs: Object.fromEntries(ROSTER.slice(0, 11).map((n, i) => [n, DLV[(i * 7 + 1) % 3]])) };
+    const dRoster = ROSTER.slice(0, ALLC.find(x => x.id === dact.cls).students), dObsN = dRoster.filter(n => dact.obs[n]).length;
+    const openD = extra => this.go('dact', { dtab: 'todo', ...(extra || {}) });
+    const cRoster = ROSTER.slice(0, ALLC.find(x => x.id === cact.cls).students);
+    const cSubmitted = cRoster.filter(n => cact.subs[n]), cEvaluated = cSubmitted.filter(n => cact.evals[n]), cToEval = cSubmitted.filter(n => !cact.evals[n]), cPending = cRoster.filter(n => !cact.subs[n]);
+    const sidOf = n => '1211660' + String(ROSTER.indexOf(n) + 1).padStart(2, '0');
+    const extOf = f => f.split('.').pop().toUpperCase();
+    const openC = extra => this.go('cact', { csub: null, ...(extra || {}) });
+    const startEvalC = n => this.go('eval', { evKind: 'C', evalS: n, evalStep: 0, checks: {}, feedback: '', intervention: '', csub: null });
+    const nudge = names => this.setState(s => { const nd = { ...s.cact.nudged }; names.forEach(n => { nd[n] = true; }); return { cact: { ...s.cact, nudged: nd } }; });
+    const stepIdx = Math.max(0, flow.indexOf(screen));
+    const isWizard = flow.includes(screen);
+    const radio = a => a ? '5px solid #FF7900' : '1.5px solid #CDCACB';
+    const canNext = screen === 'step1' ? (type === 'A' || type === 'B' || type === 'C' || type === 'D') : screen === 'a2' ? !!sv.questions : screen === 'd2' ? (dtopic.trim().length > 0 && dfocus.length > 0) : screen === 'live' ? held : screen === 'b3' ? (mgroups.length > 0 && unassigned.length === 0) : true;
+    const hint = screen === 'step1' ? (type ? '' : 'Pick a class and activity type') : screen === 'live' && !held ? 'Confirm the discussion to continue' : screen === 'b3' ? (unassigned.length ? `${unassigned.length} students still to group` : `All ${c.students} students grouped`) : '';
+    const P = { home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>', new: '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/>', actions: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 12.5l2.2 2.2 4.8-4.7"/>', hpc: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', profile: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>' };
+    const ico = (k, col) => 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="' + col + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + P[k] + '</svg>');
+    const cur = screen === 'actions' ? 'actions' : screen === 'profile' ? 'profile' : screen === 'hpc' ? 'hpc' : ['home', 'activity', 'eval', 'cact', 'dact'].includes(screen) ? 'home' : 'new';
+    const newFlow = () => this.go('step1', { type: null, held: false, mgroups: [], picks: [], search: '', gtab: 'create' });
+    const openAct = (extra) => this.go('activity', extra || {});
+
+    const recorded = act.groups.filter(x => act.subs[x.id]).length, evaluated = act.groups.filter(x => act.evals[x.id]).length;
+    const nextRecord = act.groups.find(x => !act.subs[x.id]), nextEval = act.groups.find(x => act.subs[x.id] && !act.evals[x.id]);
+    const startEval = gid => this.go('eval', { evKind: 'B', evalG: gid, evalStep: 0, checks: {}, feedback: '', intervention: '' });
+    const openRec = gid => this.setState({ rec: gid, recMode: 'Digital', recLink: '' });
+    const bAttention = nextRecord ? ['B', `Record ${nextRecord.name}’s submission`, `${act.title} · ${clsName(act.cls)}`, 'Today', 'Record', true, () => openAct({ rec: nextRecord.id, recMode: 'Digital', recLink: '' })]
+      : nextEval ? ['B', `Evaluate ${nextEval.name}`, `${act.title} · ${clsName(act.cls)}`, 'Today', 'Evaluate', true, () => startEval(nextEval.id)] : null;
+    const attentionList = [bAttention,
+      ['A', '6 students haven’t filled A3', 'How I learn · Class 9 A', '15 Sep', 'Nudge'],
+      cToEval.length ? ['C', `Evaluate ${cToEval.length} new submission${cToEval.length > 1 ? 's' : ''}`, `${cact.title} · ${clsName(cact.cls)}`, cact.deadline, 'Evaluate', false, () => openC({ cfilter: 'toeval' })] : null,
+      ['D', 'Mark students observed', `${dact.topic} · ${clsName(dact.cls)}`, dact.date, 'Mark', false, () => openD()]].filter(Boolean);
+    const liveRows = [
+      ...(launched && launched.type === 'A' ? [{ title: launched.title, meta: `${clsName(launched.cls)} · just now · due 18 Sep`, n: 0, of: ALLC.find(x => x.id === launched.cls).students, rowBg: '#FFFAF5' }] : []),
+      { title: act.title, meta: `${clsName(act.cls)} · Group Project · ${recorded} recorded, ${evaluated} evaluated`, n: evaluated, of: act.groups.length, go: () => openAct(), rowBg: launched && launched.type === 'B' ? '#FFFAF5' : '#fff' },
+      { title: cact.title, meta: `${clsName(cact.cls)} · Problem Based Enquiry · ${cSubmitted.length} submitted, ${cEvaluated.length} evaluated`, n: cSubmitted.length, of: cRoster.length, go: () => openC(), rowBg: launched && launched.type === 'C' ? '#FFFAF5' : '#fff' },
+      { title: 'A3 · How I learn', meta: 'Class 9 A · due 15 Sep', n: 9, of: 15 },
+      { title: dact.topic, meta: `${clsName(dact.cls)} · ${dact.fmt} · ${dObsN} observed`, n: dObsN, of: dRoster.length, go: () => openD() }];
+
+    const groupState = x => act.evals[x.id] ? 'evaluated' : act.subs[x.id] ? 'recorded' : 'pending';
+    const filterDefs = [['all', 'All', act.groups.length], ['pending', 'To record', act.groups.length - recorded], ['recorded', 'To evaluate', recorded - evaluated], ['evaluated', 'Evaluated', evaluated]];
+    const rows = act.groups.filter(x => filter === 'all' || groupState(x) === filter);
+    const evC = S.evKind === 'C';
+    const evS = evC ? (S.evalS && cact.subs[S.evalS] ? S.evalS : cToEval[0] || cSubmitted[0]) : null;
+    const evSubC = evC ? cact.subs[evS] : null;
+    const csS = S.csub ? cact.subs[S.csub] : null, csE = S.csub ? cact.evals[S.csub] : null;
+    const eg0 = act.groups.find(x => x.id === evalG) || act.groups[0];
+    const egSub = act.subs[eg0.id] || { mode: 'Not recorded', value: 'No submission recorded yet', at: '—' };
+    const rg = rec ? act.groups.find(x => x.id === rec) : null;
+    const dim = RUBRIC[Math.min(evalStep, 2)];
+    const dimChecks = checks[dim.key] || [];
+    const recOk = recLink.trim().length > 0;
+
+    const liveOf = id => [...(act.cls === id ? [act.title] : []), ...(cact.cls === id ? [cact.title] : []), ...(launched && launched.type === 'A' && launched.cls === id ? [launched.title] : []), ...({ '9A': ['A3 · How I learn'], '10A': ['Plastic ban debate'] }[id] || [])];
+    const rmX = S.rmCls ? ALLC.find(x => x.id === S.rmCls) : null, rmLive = rmX ? liveOf(rmX.id) : [], rmBlocked = rmLive.length > 0, rmGl = rmX ? gLabel(rmX) : '';
+    const addPicks = S.addPicks || [], aq = (S.addQuery || '').trim().toLowerCase();
+    const addAvail = ALLC.filter(x => !myClasses.includes(x.id)), addList = addAvail.filter(x => !aq || gLabel(x).toLowerCase().includes(aq) || x.name.toLowerCase().includes(aq));
+    const stamp = () => '10 Sep, ' + new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+    return {
+      wide, narrow: !wide, bottomPad: wide ? '0' : '68px', footerBottom: wide ? '0' : '68px', cardRadius: wide ? '16px' : '0', searchDisplay: w >= 720 ? 'flex' : 'none',
+      isHome: screen === 'home', isWizard, isStep1: screen === 'step1', isA2: screen === 'a2', isTopic: screen === 'b2' || screen === 'c2', isD2: screen === 'd2', isDAct: screen === 'dact', isCAct: screen === 'cact', isB3: screen === 'b3', isLiveStep: screen === 'live', isDone: screen === 'done', showFooter: isWizard && screen !== 'done',
+      isActivity: screen === 'activity', isEval: screen === 'eval',
+      wizardLabel: 'T0' + (stepIdx + 2) + ' New activity · ' + (stepNames[stepIdx] || 'Live'),
+      wizardSub: screen === 'step1' ? 'Set up an HPC activity in a few steps.' : `${c.name} · ${typeName}`,
+      goHome: g('home'), goNew: newFlow, restart: newFlow, goActivity: () => evC ? openC() : openAct(),
+      switcher: [['Home', () => this.go('home')], ['A · Survey', () => this.go('a2', { type: 'A' })], ['B · Topic', () => this.go('b2', { type: 'B' })], ['B · Groups', () => this.go('b3', { type: 'B' })], ['B · Make live', () => this.go('live', { type: 'B', held: false })], ['B · Activity', () => openAct({ rec: null })], ['B · Record', () => openAct({ rec: nextRecord ? nextRecord.id : act.groups[0].id, recMode: 'Digital', recLink: '' })], ['B · Evaluate', () => startEval(nextEval ? nextEval.id : act.groups[0].id)], ['C · Topic', () => this.go('c2', { type: 'C' })], ['C · Make live', () => this.go('live', { type: 'C', held: false })], ['C · Submissions', () => openC({ cfilter: 'toeval' })], ['C · Pending', () => openC({ cfilter: 'pending' })], ['C · Submission', () => openC({ cfilter: 'toeval', csub: cToEval[0] || cSubmitted[0] })], ['C · Evaluate', () => startEvalC(cToEval[0] || cSubmitted[0])], ['Profile', () => this.go('profile', { rmCls: null, addOpen: false })], ['Profile · Can’t remove', () => this.go('profile', { rmCls: '9A', addOpen: false })], ['Profile · Add grade', () => this.go('profile', { rmCls: null, addOpen: true, addPicks: [], addQuery: '' })]].map(([label, go], i) => {
+        const on = [screen === 'home', screen === 'a2', screen === 'b2', screen === 'b3', screen === 'live' && type === 'B', screen === 'activity' && !rec, screen === 'activity' && !!rec, screen === 'eval' && !evC, screen === 'c2', screen === 'live' && isC, screen === 'cact' && !S.csub && cfilter !== 'pending', screen === 'cact' && !S.csub && cfilter === 'pending', screen === 'cact' && !!S.csub, screen === 'eval' && evC, screen === 'profile' && !S.rmCls && !S.addOpen, screen === 'profile' && !!S.rmCls, screen === 'profile' && !!S.addOpen][i];
+        return { label, go, bg: on ? '#FF7900' : 'transparent', fg: on ? '#fff' : '#D9D6D1' };
+      }),
+      nav: [['home', 'Home', 'Home'], ['new', 'New activity', 'New'], ['actions', 'Action items', 'Actions', attentionList.length], ['hpc', 'Student HPC', 'HPC'], ['profile', 'My Profile', 'Profile']].map(([k, label, short, badge]) => { const a = cur === k; return { label, short, iconEl: React.createElement('img', { src: ico(k, a ? '#B55600' : '#3F3D45'), alt: '', width: 20, height: 20, style: { flex: 'none', display: 'block' } }), badge: badge || '', badgeDisplay: badge ? 'inline-flex' : 'none', go: k === 'home' ? g('home') : k === 'new' ? newFlow : k === 'profile' ? g('profile') : k === 'actions' ? g('actions') : k === 'hpc' ? () => this.go('hpc', { hpcStu: null }) : () => {}, bg: a ? '#FFF2E6' : 'transparent', fg: a ? '#B55600' : '#3F3D45', weight: a ? 600 : 500 }; }),
+      crumbs: (screen === 'home' ? [['Home', g('home')]] : screen === 'profile' ? [['Home', g('home')], ['My Profile', g('profile')]] : screen === 'actions' ? [['Home', g('home')], ['Action items', g('actions')]] : screen === 'dact' ? [['Home', g('home')], [dact.topic, () => openD()]] : screen === 'hpc' ? [['Home', g('home')], ['Student HPC', () => this.go('hpc', { hpcStu: null })]] : screen === 'activity' ? [['Home', g('home')], [act.title, () => openAct()]] : screen === 'cact' ? [['Home', g('home')], [cact.title, () => openC()]] : screen === 'eval' && evC ? [['Home', g('home')], [cact.title, () => openC()], ['Evaluate ' + evS, () => {}]] : screen === 'eval' ? [['Home', g('home')], [act.title, () => openAct()], ['Evaluate ' + eg0.name, () => {}]] : [['Home', g('home')], ['New activity', newFlow]]).map(([label, go], i, arr) => ({ label, go, sepDisplay: i ? 'inline' : 'none', weight: i === arr.length - 1 ? 600 : 400, fg: i === arr.length - 1 ? '#221F26' : '#6B6873' })),
+      attentionCount: attentionList.length,
+      attention: attentionList.map(([s, title, meta, due, cta, urgent, go]) => ({ section: s, title, meta, due, cta, go: go || (() => {}), chipBg: tone[s][0], chipFg: tone[s][1], dueFg: urgent ? '#B54A45' : '#6B6873' })),
+      live: liveRows.map(r => ({ ...r, go: r.go || (() => {}), count: `${r.n}/${r.of}`, pct: `${Math.max(2, Math.round(r.n / r.of * 100))}%`, rowBg: r.rowBg || '#fff' })),
+      classes: classes.map(x => ({ ...x, stats: [[x.students, 'Students'], [x.live, 'Live'], [x.review, 'To review']].map(([v, k]) => ({ v, k })), start: () => this.go('step1', { cls: x.id, type: null, held: false, mgroups: [], picks: [] }) })),
+      steps: stepNames.map((label, i) => { const done = i < stepIdx, a = i === stepIdx; return { label, mark: done ? '✓' : i + 1, lineDisplay: i ? 'block' : 'none', labelDisplay: wide || a ? 'inline' : 'none', dotBg: done ? '#FF7900' : a ? '#FFF2E6' : '#fff', dotFg: done ? '#fff' : a ? '#B55600' : '#6B6873', dotBorder: done || a ? '#FF7900' : '#D9D6D1', weight: a ? 600 : 500, fg: a ? '#221F26' : '#6B6873' }; }),
+      classOpts: classes.filter(x => { const cq = (S.classQuery || '').trim().toLowerCase(); return !cq || (x.name + ' ' + x.stream).toLowerCase().includes(cq); }).map(x => { const a = x.id === cls; return { short: x.short, name: x.name, meta: `${x.stream} · ${x.students} students`, swatch: x.bg, on: a, mark: a ? '✓' : '', pick: () => this.setState({ cls: x.id, mgroups: [], picks: [], classOpen: false, classQuery: '' }), bg: a ? '#FFFAF5' : '#fff', fg: a ? '#B55600' : '#221F26' }; }),
+      classNoMatch: !classes.some(x => { const cq = (S.classQuery || '').trim().toLowerCase(); return !cq || (x.name + ' ' + x.stream).toLowerCase().includes(cq); }),
+      selClass: { short: c.short, name: c.name, bg: c.bg, meta: `${c.stream} · ${c.students} students` },
+      classOpen: !!S.classOpen, classChevron: S.classOpen ? 'rotate(180deg)' : 'none', classTrigBorder: S.classOpen ? '#E86E00' : '#E4E1DD',
+      toggleClassOpen: () => this.setState(s => ({ classOpen: !s.classOpen, classQuery: '' })), closeClassOpen: () => this.setState({ classOpen: false, classQuery: '' }),
+      classQuery: S.classQuery || '', setClassQuery: e => this.setState({ classQuery: e.target.value }),
+      types: typeList.map(([s, title, body, meta]) => { const a = type === s; return { s, title, body, meta, chipBg: tone[s][0], chipFg: tone[s][1], pick: () => this.setState({ type: s }), border: a ? '#FF7900' : '#E4E1DD', bg: a ? '#FFFAF5' : '#fff', titleFg: a ? '#B55600' : '#221F26', radio: radio(a) }; }),
+      splitCols: wide ? '300px minmax(0,1fr)' : '1fr', splitBorder: wide ? '#F1EFEC' : 'transparent', splitBorderB: wide ? 'transparent' : '#F1EFEC',
+      surveys: svs.map(s => {
+        const dis = !!s.status, a = survey === s.id;
+        const tag = { na: ['Coming soon', '#E8E5E1', '#6B6873'], live: ['Live', '#E3F5E1', '#1B6B34'], done: ['Done', '#F1EFEC', '#6B6873'] }[s.status];
+        return { code: s.code, title: s.title, pick: dis ? () => {} : () => this.setState({ survey: s.id }), cursor: dis ? 'default' : 'pointer', border: a ? '#FF7900' : 'transparent', bg: a ? '#fff' : 'transparent', fg: dis ? '#A7A4AC' : '#221F26', codeFg: dis ? '#A7A4AC' : a ? '#B55600' : '#6B6873', weight: a ? 600 : 500, tag: tag ? tag[0] : '', tagDisplay: tag ? 'inline-block' : 'none', tagBg: tag ? tag[1] : '', tagFg: tag ? tag[2] : '' };
+      }),
+      sv, svMeta: [['Questions', String((sv.questions || []).length)], ['Competency', sv.competency || '—'], ['Time', 'about 10 min']].map(([k, v]) => ({ k, v })),
+      svSteps: (sv.steps || []).map((t, i) => ({ n: i + 1, t })),
+      svQuestions: (sv.questions || []).map(([q, o], i) => ({ n: i + 1, q, opts: o.join(' · ') })),
+      tp: isC ? ctp : tp, topicListTitle: isC ? 'Problem Based Enquiry topics' : 'Group Project topics', tpSection: isC ? 'Section C · Problem Based Enquiry' : 'Section B · Group Project', tpFg: isC ? '#6A3FC4' : '#3653B8',
+      topicOpts: (isC ? C_TOPICS : TOPICS).map(t => { const a = isC ? t.id === ctp.id : t.id === topic; return { title: t.title, subject: t.subject, pick: () => this.setState(isC ? { ctopic: t.id } : { topic: t.id }), border: a ? '#FF7900' : 'transparent', bg: a ? '#fff' : 'transparent', fg: a ? '#B55600' : '#221F26', weight: a ? 600 : 500 }; }),
+      stageStrip: ['Plan', 'Observe', 'Final'].map((label, i) => ({ label, n: i + 1, lineDisplay: i ? 'block' : 'none' })),
+      topicRows: (isC ? [['Learning outcome', ctp.outcome], ['Competency', ctp.competency], ['Pedagogy', ctp.pedagogy], ['Submission', 'Each student · file, photo or link + a short description'], ['Rubric', 'Awareness · Sensitivity · Creativity']] : [['Learning outcome', tp.outcome], ['Competency', tp.competency], ['Pedagogy', tp.pedagogy], ['Rubric', 'Awareness · Sensitivity · Creativity']]).map(([k, v]) => ({ k, v })),
+      materials: [['Teacher handbook', 'PDF · how to run all three stages'], ['Student worksheet', 'PDF · print or share in class']].map(([title, meta]) => ({ title, meta, dl: () => this.flash(`${title} downloaded`) })),
+      gCols: wide ? 'minmax(0,1fr) 340px' : '1fr',
+      gTabs: [['create', 'Create Groups'], ['view', `View Groups (${mgroups.length})`]].map(([k, label]) => ({ label, go: () => this.setState({ gtab: k }), bg: S.gtab === k ? '#fff' : 'transparent', fg: S.gtab === k ? '#221F26' : '#6B6873' })),
+      showCreatePane: wide || S.gtab === 'create', showViewPane: wide || S.gtab === 'view',
+      createTitle: unassigned.length ? `Create Group ${mgroups.length + 1}` : 'Everyone is in a group',
+      remainingText: unassigned.length ? `${unassigned.length} of ${c.students} students not in a group yet` : 'Review the groups, then continue.',
+      size, sizeDown: () => this.setState(s => ({ size: Math.max(2, s.size - 1), picks: s.picks.slice(0, Math.max(2, s.size - 1)) })), sizeUp: () => this.setState(s => ({ size: Math.min(8, s.size + 1) })),
+      target, pickCount: picks.length, pickPct: target ? Math.round(picks.length / target * 100) + '%' : '100%',
+      search: S.search, setSearch: e => this.setState({ search: e.target.value }),
+      pool: poolList.map((n, i) => { const on = picks.includes(n), full = !on && picks.length >= target; return { name: n, initials: initials(n), sid: '1211660' + String(classRoster.indexOf(n) + 1).padStart(2, '0'), on, mark: on ? '✓' : '', toggle: full ? () => {} : () => this.setState(s => ({ picks: on ? s.picks.filter(x => x !== n) : [...s.picks, n] })), cursor: full ? 'not-allowed' : 'pointer', opacity: full ? 0.5 : 1, bg: on ? '#FFFAF5' : '#fff', checkBg: on ? '#FF7900' : '#fff', checkBorder: on ? '#FF7900' : '#CDCACB' }; }),
+      poolEmpty: poolList.length === 0, poolEmptyText: unassigned.length ? 'No students match your search.' : 'All students are in a group.',
+      createDisplay: unassigned.length ? 'block' : 'none',
+      createBg: picks.length === target && target ? '#FF7900' : '#CDCDCD', createFg: picks.length === target && target ? '#fff' : '#A7A4AC', createCursor: picks.length === target && target ? 'pointer' : 'not-allowed',
+      createGroup: () => { if (picks.length !== target || !target) return; const n = mgroups.length + 1; this.setState(s => ({ mgroups: [...s.mgroups, s.picks], picks: [], search: '' })); this.flash(`Group ${n} created`); },
+      assignedText: `${assigned.length}/${c.students} students`,
+      noGroups: mgroups.length === 0,
+      createdGroups: wizGroups.map((gr, i) => ({ code: gr.code, name: gr.name, color: gr.color, count: `${gr.members.length} students`, members: gr.members.join(', '), remove: () => this.setState(s => ({ mgroups: s.mgroups.filter((_, j) => j !== i) })) })),
+      deadlineLabel: type === 'B' ? 'Final submission deadline' : isC ? 'Submission deadline' : isD ? 'Activity date' : 'Deadline', deadlineVal: type === 'B' ? '2026-10-15' : isC ? '2026-09-16' : isD ? '2026-09-17' : '2026-09-18', deadlineHelp: type === 'B' ? 'Group projects usually run 4–5 weeks across the three stages.' : isC ? 'Students submit their own work before this date. You can nudge anyone who hasn’t.' : 'We suggest at least one week.',
+      heldHelp: isD ? 'Students know the format, the topic and what you will observe.' : type === 'B' ? 'Students know the topic, the three stages and how their group will be evaluated.' : isC ? 'Students know the problem, what to submit and how their work will be evaluated.' : 'Students understand what the reflection is for and that it isn’t marked.',
+      held, toggleHeld: () => this.setState(s => ({ held: !s.held })),
+      heldBorder: held ? '#FF7900' : '#E4E1DD', heldBg: held ? '#FFFAF5' : '#fff', checkBg: held ? '#FF7900' : '#fff', checkBorder: held ? '#FF7900' : '#CDCACB', checkMark: held ? '✓' : '',
+      className: c.name, classShort: c.short.replace(' ', ''),
+      summary: (isD
+        ? [['Class', `${c.name} · ${c.students} students`], ['Activity', 'Section D · Classroom Interaction'], ['Format', dfmt], ['Topic', dtopic], ['Observing', dfocus.join(' · ')]]
+        : isC
+        ? [['Class', `${c.name} · ${c.students} students`], ['Activity', 'Section C · Problem Based Enquiry'], ['Topic', ctp.title], ['Submission', 'Individual'], ['Rubric', 'Awareness · Sensitivity · Creativity']]
+        : type === 'B'
+        ? [['Class', `${c.name} · ${c.students} students`], ['Activity', 'Section B · Group Project'], ['Topic', tp.title], ['Groups', `${wizGroups.length} groups`], ['Stages', 'Plan → Observe → Final']]
+        : [['Class', `${c.name} · ${c.students} students`], ['Activity', 'Section A · Know Myself'], ['Survey', `${sv.code} · ${sv.title}`], ['Questions', String((sv.questions || []).length)]]).map(([k, v]) => ({ k, v })),
+      doneTitle: isD ? `${dtopic} is live for ${c.name}` : isC ? `${ctp.title} is live for ${c.name}` : type === 'B' ? `${tp.title} is live for ${c.name}` : `${sv.code} · ${sv.title} is live for ${c.name}`,
+      doneBody: isD ? `Run the ${dfmt.toLowerCase()} on 17 Sep. Rate each student on ${dfocus.length} skill${dfocus.length > 1 ? 's' : ''} as you observe.` : isC ? `${c.students} students can submit their work until 16 Sep. Evaluate each submission with the rubric as it comes in.` : type === 'B' ? `${wizGroups.length} groups can start the Plan stage. Record each group’s submission when they hand it in, then evaluate it with the rubric.` : `${c.students} students can fill it until 18 Sep. You’ll see responses under Live activities on your home page.`,
+      donePrimaryLabel: type === 'B' || isC || isD ? 'Open activity' : 'Go to Home', donePrimary: isD ? () => openD() : isC ? () => openC({ cfilter: 'pending' }) : type === 'B' ? () => openAct({ filter: 'all' }) : g('home'),
+      footerHint: hint, backDisplay: stepIdx ? 'block' : 'none',
+      nextLabel: screen === 'live' ? 'Make live' : 'Continue', nextDisabled: !canNext,
+      nextBg: canNext ? '#FF7900' : '#CDCDCD', nextFg: canNext ? '#fff' : '#A7A4AC', nextCursor: canNext ? 'pointer' : 'not-allowed',
+      back: () => this.go(flow[Math.max(0, stepIdx - 1)]),
+      next: () => {
+        if (!canNext) return;
+        const nx = flow[stepIdx + 1];
+        if (screen === 'b2') return this.go(nx, { gtab: 'create' });
+        if (screen === 'live') {
+          if (isD) return this.go('done', { launched: { type: 'D' }, dact: { fmt: dfmt, topic: dtopic.trim(), cls, date: '17 Sep', focus: dfocus, obs: {} }, dtab: 'todo' });
+          if (isC) return this.go('done', { launched: { type: 'C' }, cact: { title: ctp.title, topic: ctp.id, cls, deadline: '16 Sep', subs: {}, evals: {}, nudged: {} }, cfilter: 'pending' });
+          if (type === 'B') return this.go('done', { launched: { type: 'B' }, act: { title: tp.title, topic, cls, deadline: '15 Oct', groups: wizGroups, subs: {}, evals: {} }, filter: 'all' });
+          return this.go('done', { launched: { type: 'A', title: `${sv.code} · ${sv.title}`, cls } });
+        }
+        this.go(nx);
+      },
+      act, actClassName: clsName(act.cls), actGroupCount: act.groups.length, actCols: wide ? 'minmax(0,1fr) 320px' : '1fr',
+      actStats: [['Groups', act.groups.length, '', 100, '#FF7900'], ['Submissions recorded', recorded, `/ ${act.groups.length}`, recorded / act.groups.length * 100, '#FF7900'], ['Evaluated', evaluated, `/ ${act.groups.length}`, evaluated / act.groups.length * 100, '#1B6B34']].map(([k, v, of, p, bar]) => ({ k, v, of, pct: p + '%', bar })),
+      actRows: [['Topic', act.title], ['Class', clsName(act.cls)], ['Deadline', act.deadline + ' 2026'], ['Rubric', 'Awareness · Sensitivity · Creativity']].map(([k, v]) => ({ k, v })),
+      filters: filterDefs.map(([k, label, n]) => ({ label: `${label} ${n}`, go: () => this.setState({ filter: k }), border: filter === k ? '#221F26' : '#E4E1DD', bg: filter === k ? '#221F26' : '#fff', fg: filter === k ? '#fff' : '#3F3D45' })),
+      noRows: rows.length === 0,
+      groupRows: rows.map(x => {
+        const st = groupState(x), sub = act.subs[x.id], ev = act.evals[x.id];
+        const cfg = { pending: ['Not submitted', '#F1EFEC', '#6B6873', 'Record', () => openRec(x.id), true], recorded: ['To evaluate', '#FFF2E6', '#B55600', 'Evaluate', () => startEval(x.id), true], evaluated: ['Evaluated', '#E3F5E1', '#1B6B34', 'View', () => {}, false] }[st];
+        return { code: x.code, name: x.name, color: x.color, members: x.members.join(', '), tag: cfg[0], tagBg: cfg[1], tagFg: cfg[2], cta: cfg[3], go: cfg[4], when: ev ? `Evaluated ${ev.at}` : sub ? `${sub.mode} · ${sub.at}` : 'Awaiting work', ctaBorder: cfg[5] ? '#FF7900' : '#E4E1DD', ctaBg: st === 'recorded' ? '#FF7900' : cfg[5] ? '#FFF2E6' : '#fff', ctaFg: st === 'recorded' ? '#fff' : cfg[5] ? '#B55600' : '#221F26' };
+      }),
+      recOpen: screen === 'activity' && !!rg, rg: rg ? { name: rg.name, members: rg.members.join(', ') } : { name: '', members: '' },
+      drawerAlign: wide ? 'stretch' : 'flex-end', drawerW: wide ? '440px' : '100%', drawerH: wide ? '100%' : 'auto', drawerMaxH: wide ? '100%' : '88vh', drawerRadius: wide ? '0' : '20px 20px 0 0',
+      closeRec: () => this.setState({ rec: null }),
+      recModes: [['Digital', 'Link or files'], ['Offline', 'Paper, poster or model']].map(([label, sub]) => ({ label, sub, go: () => this.setState({ recMode: label, recLink: '' }), border: recMode === label ? '#FF7900' : '#E4E1DD', bg: recMode === label ? '#FFFAF5' : '#fff', fg: recMode === label ? '#B55600' : '#221F26' })),
+      recDigital: recMode === 'Digital', recOffline: recMode === 'Offline', recLink, setRecLink: e => this.setState({ recLink: e.target.value }),
+      recBg: recOk ? '#FF7900' : '#CDCDCD', recFg: recOk ? '#fff' : '#A7A4AC', recCursor: recOk ? 'pointer' : 'not-allowed',
+      saveRec: () => { if (!recOk) return; const name = rg.name; this.setState(s => ({ rec: null, act: { ...s.act, subs: { ...s.act.subs, [rg.id]: { mode: recMode, value: recLink.trim(), at: stamp() } } } })); this.flash(`${name}’s submission recorded`); },
+      evalCols: wide ? '300px minmax(0,1fr)' : '1fr',
+      eg: evC
+        ? { name: evS, code: initials(evS), color: '#FFF2E6', countText: 'Student ID ' + sidOf(evS), memberList: [], membersDisplay: 'none', subMode: 'FILLED BY STUDENT', subValue: evSubC.desc, subAt: evSubC.at, fileDisplay: 'flex', fileName: evSubC.file, fileSize: evSubC.size, fileExt: extOf(evSubC.file) }
+        : { name: eg0.name, code: eg0.code, color: eg0.color, countText: `${eg0.members.length} members`, memberList: eg0.members.map(m => ({ name: m, initials: initials(m) })), membersDisplay: 'flex', subMode: egSub.mode.toUpperCase(), subValue: egSub.value, subAt: egSub.at, fileDisplay: 'none', fileName: '', fileSize: '', fileExt: '' },
+      evC, evalLabel: evC ? 'T15 Evaluate student' : 'T12 Evaluate group', evalSub: evC ? `${cact.title} · ${clsName(cact.cls)}` : `${act.title} · ${clsName(act.cls)}`,
+      tickHelp: evC ? 'Tick every statement that is true of this student’s work.' : 'Tick everything the group showed in their work.', fbTitle: evC ? 'Feedback for the student' : 'Feedback for the group',
+      viewEvFile: () => evSubC && this.flash(`Opening ${evSubC.file}`),
+      cact, cClassName: clsName(cact.cls), cRosterCount: cRoster.length, cWhy: (C_TOPICS.find(t => t.id === cact.topic) || C_TOPICS[0]).why,
+      cStats: [['Submitted', cSubmitted.length, `/ ${cRoster.length}`, cSubmitted.length / cRoster.length, '#FF7900'], ['Evaluated', cEvaluated.length, `/ ${cSubmitted.length}`, cSubmitted.length ? cEvaluated.length / cSubmitted.length : 0, '#1B6B34'], ['Not submitted', cPending.length, `/ ${cRoster.length}`, cPending.length / cRoster.length, '#B54A45']].map(([k, v, of, p, bar]) => ({ k, v, of, pct: Math.round(p * 100) + '%', bar })),
+      cFilters: [['toeval', 'To evaluate', cToEval.length], ['evaluated', 'Evaluated', cEvaluated.length], ['pending', 'Not submitted', cPending.length]].map(([k, label, n]) => ({ label: `${label} ${n}`, go: () => this.setState({ cfilter: k }), border: cfilter === k ? '#221F26' : '#E4E1DD', bg: cfilter === k ? '#221F26' : '#fff', fg: cfilter === k ? '#fff' : '#3F3D45' })),
+      cNudgeBarDisplay: cfilter === 'pending' && cPending.some(n => !cact.nudged[n]) ? 'flex' : 'none',
+      nudgeAllLabel: `Send nudge to ${cPending.filter(n => !cact.nudged[n]).length} students`,
+      nudgeAll: () => { const list = cPending.filter(n => !cact.nudged[n]); nudge(list); this.flash(`Nudge sent to ${list.length} students`); },
+      cRows: (cfilter === 'toeval' ? cToEval : cfilter === 'evaluated' ? cEvaluated : cPending).map(n => {
+        const s = cact.subs[n], ev = cact.evals[n], nd = cact.nudged[n];
+        const base = { name: n, initials: initials(n), view: () => this.setState({ csub: n }), viewDisplay: s && !ev ? 'block' : 'none', ctaCursor: 'pointer' };
+        if (!s) return { ...base, meta: `Student ID ${sidOf(n)} · no work yet`, tag: nd ? 'Nudged today' : 'Not submitted', tagBg: '#F1EFEC', tagFg: '#6B6873', cta: nd ? 'Nudged' : 'Nudge', go: nd ? () => {} : () => { nudge([n]); this.flash(`Nudge sent to ${n}`); }, ctaCursor: nd ? 'default' : 'pointer', ctaBorder: nd ? '#E4E1DD' : '#B55600', ctaBg: nd ? '#fff' : '#FFF2E6', ctaFg: nd ? '#A7A4AC' : '#B55600' };
+        if (ev) return { ...base, meta: `Student ID ${sidOf(n)} · evaluated ${ev.at}`, tag: 'Evaluated', tagBg: '#E3F5E1', tagFg: '#1B6B34', cta: 'View', go: () => this.setState({ csub: n }), ctaBorder: '#E4E1DD', ctaBg: '#fff', ctaFg: '#221F26' };
+        return { ...base, meta: `${extOf(s.file)} · submitted ${s.at}`, tag: 'To evaluate', tagBg: '#FFF2E6', tagFg: '#B55600', cta: 'Evaluate', go: () => startEvalC(n), ctaBorder: '#FF7900', ctaBg: '#FF7900', ctaFg: '#fff' };
+      }),
+      cEmpty: (cfilter === 'toeval' ? cToEval : cfilter === 'evaluated' ? cEvaluated : cPending).length === 0,
+      cEmptyText: { toeval: cSubmitted.length ? 'All submissions are evaluated.' : 'No submissions yet. Students’ work appears here as they submit.', evaluated: 'No evaluations yet.', pending: 'Everyone has submitted.' }[cfilter],
+      cAbout: [['Topic', cact.title], ['Class', clsName(cact.cls)], ['Deadline', cact.deadline + ' 2026'], ['Rubric', 'Awareness · Sensitivity · Creativity']].map(([k, v]) => ({ k, v })),
+      csubOpen: screen === 'cact' && !!csS,
+      cs: csS ? { name: S.csub, sid: sidOf(S.csub), at: csS.at, file: csS.file, size: csS.size, ext: extOf(csS.file), desc: csS.desc, statusTitle: csE ? `Evaluated on ${csE.at}` : 'Submission received', evalDisplay: csE ? 'none' : 'block' } : { name: '', sid: '', at: '', file: '', size: '', ext: '', desc: '', statusTitle: '', evalDisplay: 'none' },
+      csEvaluated: !!csE, csRecap: RUBRIC.map(r => ({ k: r.label, v: `${((csE && csE.checks[r.key]) || []).length}/4` })), csFeedback: csE ? (csE.feedback || 'No feedback written.') : '',
+      closeCsub: () => this.setState({ csub: null }), evalFromCsub: () => startEvalC(S.csub),
+      viewCsFile: () => csS && this.flash(`Opening ${csS.file}`), dlCsFile: () => csS && this.flash(`${csS.file} downloaded`),
+      evalTabs: [...RUBRIC.map(r => r.label), 'Feedback'].map((label, i) => { const a = i === evalStep, done = i < evalStep; return { label: (done ? '✓ ' : '') + label, go: () => this.setState({ evalStep: i }), border: a ? '#FF7900' : '#E4E1DD', bg: a ? '#FFF2E6' : done ? '#fff' : '#fff', fg: a ? '#B55600' : done ? '#1B6B34' : '#6B6873' }; }),
+      isRubricStep: evalStep < 3, isFeedbackStep: evalStep === 3,
+      dim, dimStep: `Step ${evalStep + 1} of 4`, dimCount: `${dimChecks.length} of ${dim.statements.length} observed`,
+      dimRows: dim.statements.map((text, i) => { const on = dimChecks.includes(i); return { text, mark: on ? '✓' : '', toggle: () => this.setState(s => { const cur = s.checks[dim.key] || []; return { checks: { ...s.checks, [dim.key]: cur.includes(i) ? cur.filter(x => x !== i) : [...cur, i] } }; }), border: on ? '#FF7900' : '#E4E1DD', bg: on ? '#FFFAF5' : '#fff', checkBg: on ? '#FF7900' : '#fff', checkBorder: on ? '#FF7900' : '#CDCACB' }; }),
+      feedback: S.feedback, intervention: S.intervention, setFeedback: e => this.setState({ feedback: e.target.value }), setIntervention: e => this.setState({ intervention: e.target.value }),
+      rubricRecap: RUBRIC.map(r => ({ k: r.label, v: `${(checks[r.key] || []).length}/4` })),
+      evalPrevDisplay: evalStep ? 'block' : 'none', evalPrev: () => this.setState({ evalStep: Math.max(0, evalStep - 1) }),
+      evalNextLabel: evalStep === 3 ? 'Save evaluation' : 'Next',
+      evalNext: () => {
+        if (evalStep < 3) return this.setState({ evalStep: evalStep + 1 });
+        if (evC) { this.go('cact', { cfilter: 'toeval', cact: { ...cact, evals: { ...cact.evals, [evS]: { checks, feedback: S.feedback, at: '10 Sep' } } } }); return this.flash(`${evS} evaluated`); }
+        const total = RUBRIC.reduce((a, r) => a + (checks[r.key] || []).length, 0), name = eg0.name;
+        this.go('activity', { act: { ...act, evals: { ...act.evals, [eg0.id]: { count: total, at: '10 Sep' } } } });
+        this.flash(`${name} evaluated`);
+      },
+      dFormats: DFMT.map(k => { const a = k === dfmt; return { label: k, on: a, weight: a ? 600 : 500, bg: a ? '#FF7900' : '#fff', fg: a ? '#fff' : '#221F26', border: a ? '#FF7900' : '#E4E1DD', pick: () => this.setState({ dfmt: k }) }; }),
+      dTopic: dtopic, setDTopic: e => this.setState({ dtopic: e.target.value }),
+      dFocus: DFOC.map(([label, hint]) => { const a = dfocus.includes(label); return { label, hint, on: a, mark: a ? '✓' : '', border: a ? '#FF7900' : '#E4E1DD', bg: a ? '#FFFAF5' : '#fff', checkBg: a ? '#FF7900' : '#fff', pick: () => this.setState({ dfocus: a ? dfocus.filter(x => x !== label) : [...dfocus, label] }) }; }),
+      dAct: dact, dClassName: clsName(dact.cls), dFocusText: dact.focus.join(' · '), dCount: dObsN + ' of ' + dRoster.length, dLeft: dRoster.length - dObsN ? (dRoster.length - dObsN) + ' left' : 'All done', dPct: Math.round(dObsN / dRoster.length * 100) + '%',
+      ...(() => {
+        const tab = S.dtab || 'todo', setObs = (n, l) => this.setState({ dact: { ...dact, obs: { ...dact.obs, [n]: l } } });
+        const todo = dRoster.filter(n => !dact.obs[n]), done = dRoster.filter(n => dact.obs[n]), list = tab === 'todo' ? todo : tab === 'done' ? done : dRoster;
+        const col = { Beginning: ['#FDE8E7', '#B54A45', '#D9665F'], Developing: ['#FFF1D0', '#8A5A00', '#E5A019'], Proficient: ['#E3F4EA', '#1F7A4D', '#3BA36F'] };
+        return {
+          dTabs: [['todo', 'To observe', todo.length], ['done', 'Observed', done.length], ['all', 'All', dRoster.length]].map(([k, label, n]) => { const a = k === tab; return { label, n, weight: a ? 600 : 500, bg: a ? '#FF7900' : '#fff', fg: a ? '#fff' : '#221F26', border: a ? '#FF7900' : '#E4E1DD', pick: () => this.setState({ dtab: k }) }; }),
+          dRows: list.map(n => ({ name: n, ini: initials(n), levels: DLV.map(l => { const a = dact.obs[n] === l; return { label: l, on: a, weight: a ? 600 : 500, bg: a ? col[l][0] : '#fff', fg: a ? col[l][1] : '#3F3D45', border: a ? col[l][2] : '#E4E1DD', pick: () => setObs(n, l) }; }) })),
+          dEmpty: list.length === 0, dEmptyText: tab === 'todo' ? 'Everyone is observed. Nice work.' : 'No students observed yet.',
+          dMarkDisplay: todo.length ? 'block' : 'none', dMarkRest: () => { const o = { ...dact.obs }; todo.forEach(n => { o[n] = 'Developing'; }); this.setState({ dact: { ...dact, obs: o } }); this.flash(todo.length + ' marked Developing'); }
+        };
+      })(),
+      isActions: screen === 'actions', ...(() => {
+        const dis = S.actDone || [], af = S.actF || 'All';
+        const items = attentionList.filter(a => !dis.includes(a[1])).map(([sec, title, meta, due, cta, urgent, go]) => ({ section: sec, title, meta, due, cta, urgent: !!urgent, chipBg: tone[sec][0], chipFg: tone[sec][1], dueFg: urgent ? '#B54A45' : '#6B6873', go: go || (() => { this.setState({ actDone: [...dis, title] }); this.flash(cta === 'Nudge' ? 'Nudge sent' : 'Done'); }) }));
+        const shown = items.filter(a => af === 'All' || a.section === af), grp = (title, dot, l) => ({ title, dot, count: l.length, items: l });
+        const gs = [grp('Needs attention today', '#B54A45', shown.filter(a => a.urgent)), grp('Upcoming', '#E5A019', shown.filter(a => !a.urgent))].filter(x => x.count);
+        return {
+          actSub: items.length ? items.length + ' thing' + (items.length > 1 ? 's' : '') + ' waiting on you across your classes.' : 'Nothing pending.',
+          actChips: ['All', 'A', 'B', 'C', 'D'].map(k => { const a = k === af; return { label: k === 'All' ? 'All' : 'Section ' + k, n: items.filter(x => k === 'All' || x.section === k).length, weight: a ? 600 : 500, bg: a ? '#FF7900' : '#fff', fg: a ? '#fff' : '#221F26', border: a ? '#FF7900' : '#E4E1DD', pick: () => this.setState({ actF: k }) }; }),
+          actGroups: gs, actEmpty: gs.length === 0
+        };
+      })(),
+      isHpc: screen === 'hpc', ...(() => {
+        const cid = S.hpcCls && classes.find(x => x.id === S.hpcCls) ? S.hpcCls : c.id, hc = classes.find(x => x.id === cid) || c;
+        const N = ['Aarav Thakur', 'Diya Verma', 'Kabir Negi', 'Meera Chauhan', 'Rohan Bhardwaj', 'Ananya Sood', 'Vihaan Rana', 'Ishita Kapoor', 'Arjun Sharma', 'Tanvi Mehta', 'Yash Pathania', 'Riya Kaushal', 'Dev Thakur', 'Sanya Bisht', 'Nikhil Dogra'];
+        const SEC = [['A', 'Know Myself', 6], ['B', 'Problem Based Enquiry', 5], ['C', 'Six C’s', 6], ['D', 'Classroom Interaction', 8]];
+        const lv = p => p >= 75 ? ['Proficient', '#E3F4EA', '#1F7A4D', '#3BA36F'] : p >= 50 ? ['Developing', '#FFF1D0', '#8A5A00', '#E5A019'] : ['Beginning', '#FDE8E7', '#B54A45', '#D9665F'];
+        const rk = { Proficient: 'Works independently and explains their thinking clearly.', Developing: 'Making steady progress; a few more activities will build confidence.', Beginning: 'Needs a nudge to start. Consider a one-to-one check-in.' };
+        const avs = ['#BFC3FB', '#FFC1D6', '#FFF1D0', '#CBEDF4'];
+        const stu = i => { const secs = SEC.map(([code, name, tot], j) => { const p = Math.min(100, 28 + ((i * 37 + j * 53 + hc.students * 11) * 7919) % 72), done = Math.round(tot * p / 100), pp = Math.round(done / tot * 100), l = lv(pp); return { code, name, total: tot, done, pct: pp + '%', w: Math.max(3, pp) + '%', level: l[0], chipBg: l[1], chipFg: l[2], c: l[3], remark: rk[l[0]] }; }); const o = Math.round(secs.reduce((a, x) => a + parseInt(x.pct), 0) / 4), l = lv(o); return { i, name: N[i % N.length], ini: N[i % N.length].split(' ').map(z => z[0]).join(''), roll: String(i + 1).padStart(2, '0'), av: avs[i % 4], sections: secs, overall: o + '%', o, level: l[0], chipBg: l[1], chipFg: l[2] }; };
+        const all = Array.from({ length: hc.students }, (_, i) => stu(i)), q = (S.hpcQ || '').trim().toLowerCase();
+        const rows = all.filter(x => !q || x.name.toLowerCase().includes(q)).map(x => ({ ...x, bars: x.sections.map(z => ({ code: z.code, w: z.w, c: z.c })), open: () => this.setState({ hpcStu: x.i }) }));
+        const sd = S.hpcStu != null ? all[S.hpcStu] : null;
+        return {
+          hpcList: !sd, hpcDetail: !!sd, d: sd || { sections: [] }, hpcRows: rows, hpcEmpty: rows.length === 0, hpcQ: S.hpcQ || '', hpcClsName: hc.name, hpcTitle: hc.name + ' · ' + hc.students + ' students',
+          setHpcQ: e => this.setState({ hpcQ: e.target.value }), hpcBack: () => this.setState({ hpcStu: null }),
+          hpcClasses: classes.map(x => { const a = x.id === hc.id; return { label: x.name, weight: a ? 600 : 500, bg: a ? '#FF7900' : '#fff', fg: a ? '#fff' : '#221F26', border: a ? '#FF7900' : '#E4E1DD', pick: () => this.setState({ hpcCls: x.id, hpcStu: null, hpcQ: '' }) }; }),
+          hpcStats: [[all.length, 'Students', '#221F26'], [Math.round(all.reduce((a, x) => a + x.o, 0) / all.length) + '%', 'Average progress', '#B55600'], [all.filter(x => x.o < 50).length, 'Need a nudge', '#B54A45']].map(([v, k, fg]) => ({ v, k, fg }))
+        };
+      })(),
+      isProfile: screen === 'profile', goProfile: g('profile'),
+      myGrades: classes.map((x, i) => ({ n: i + 1, label: gLabel(x), liveDisplay: liveOf(x.id).length ? 'inline' : 'none', remove: () => this.setState({ rmCls: x.id }), removeLabel: 'Remove ' + gLabel(x) })),
+      noGrades: classes.length === 0,
+      schoolRows: [['School Name', 'VARANA PRIMARY SCHOOL', '1 / -1'], ['UDISE Code', '123515287584', '1 / -1'], ['Block', 'Dholka', 'auto'], ['District', 'Dharamshala', 'auto'], ['State', 'Himachal Pradesh', '1 / -1']].map(([k, v, span]) => ({ k, v, span })),
+      langs: [['en', 'English', 'Default'], ['hi', 'हिन्दी', 'Hindi']].map(([k, name, sub]) => { const on = (S.lang || localStorage.getItem('hpct3-lang') || 'en') === k; return { name, sub, on, dot: on ? 'block' : 'none', bg: on ? '#FFFAF5' : '#fff', border: on ? '#FF7900' : '#E4E1DD', pick: () => { localStorage.setItem('hpct3-lang', k); this.setState({ lang: k }); this.flash(k === 'hi' ? 'भाषा हिन्दी में बदली गई' : 'Language set to English'); } }; }),
+      openPolicies: () => this.flash('About & policies opens here'), logOut: () => this.flash('Logged out (demo)'),
+      rmOpen: screen === 'profile' && !!rmX, rmLabel: rmBlocked ? 'T22 Remove grade · blocked' : 'T22 Remove grade · confirm',
+      rmTitle: rmBlocked ? `You can’t remove ${rmGl} yet` : `Remove ${rmGl}?`,
+      rmBody: rmBlocked ? `${rmGl} has ${rmLive.length} live activit${rmLive.length > 1 ? 'ies' : 'y'}. You can remove it once ${rmLive.length > 1 ? 'they are' : 'it is'} completed.` : `It won’t appear on your home page or when you start an activity. Past HPC records stay safe.`,
+      rmList: rmLive.map(t => ({ t })), rmListDisplay: rmBlocked ? 'flex' : 'none', rmConfirmDisplay: rmBlocked ? 'none' : 'block',
+      rmCancelLabel: rmBlocked ? 'OK' : 'Cancel', rmCancelBorder: rmBlocked ? '#FF7900' : '#E4E1DD', rmCancelBg: rmBlocked ? '#FF7900' : '#fff', rmCancelFg: rmBlocked ? '#fff' : '#221F26', rmCancelWeight: rmBlocked ? 600 : 500,
+      closeRm: () => this.setState({ rmCls: null }),
+      confirmRm: () => { if (!rmX || rmBlocked) return; this.setState(s => ({ myClasses: s.myClasses.filter(x => x !== rmX.id), rmCls: null })); this.flash(`${rmGl} removed`); },
+      addOpen: screen === 'profile' && !!S.addOpen, openAdd: () => this.setState({ addOpen: true, addPicks: [], addQuery: '' }), closeAdd: () => this.setState({ addOpen: false }),
+      addQuery: S.addQuery || '', setAddQuery: e => this.setState({ addQuery: e.target.value }),
+      addOpts: addList.map(x => { const on = addPicks.includes(x.id); return { label: gLabel(x), students: x.students, on, mark: on ? '✓' : '', toggle: () => this.setState(s => ({ addPicks: on ? s.addPicks.filter(p => p !== x.id) : [...s.addPicks, x.id] })), checkBg: on ? '#FF7900' : '#fff', checkBorder: on ? '#FF7900' : '#CDCACB' }; }),
+      addEmpty: addList.length === 0, addEmptyText: addAvail.length ? 'No grades match your search.' : 'You’ve added every grade in your school.',
+      addLabel: addPicks.length ? `Add ${addPicks.length} grade${addPicks.length > 1 ? 's' : ''}` : 'Add grades',
+      addBg: addPicks.length ? '#FF7900' : '#CDCDCD', addFg: addPicks.length ? '#fff' : '#A7A4AC', addCursor: addPicks.length ? 'pointer' : 'not-allowed',
+      saveAdd: () => { if (!addPicks.length) return; const n = addPicks.length; this.setState(s => ({ myClasses: ALLC.filter(x => s.myClasses.includes(x.id) || s.addPicks.includes(x.id)).map(x => x.id), addOpen: false, addPicks: [] })); this.flash(`${n} grade${n > 1 ? 's' : ''} added`); },
+      addAlign: wide ? 'center' : 'flex-end', addPad: wide ? '16px' : '0', addMaxH: wide ? '80vh' : '88vh', addRadius: wide ? '18px' : '20px 20px 0 0',
+      hasToast: !!S.toast, toast: S.toast, toastBottom: wide ? '24px' : '84px',
+    };
+  }
+}
+</script>
+</body>
+</html>
